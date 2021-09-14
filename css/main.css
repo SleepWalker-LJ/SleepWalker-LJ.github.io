@@ -1738,6 +1738,13 @@ pre code {
 .back-to-top.back-to-top-on {
   bottom: 19px;
 }
+.post-block {
+  margin-top: 60px;
+  margin-bottom: 60px;
+  padding: 25px;
+  -webkit-box-shadow: 0 0 5px rgba(202,203,203,0.5);
+  -moz-box-shadow: 0 0 5px rgba(202,203,204,0.5);
+}
 .rtl.post-body p,
 .rtl.post-body a,
 .rtl.post-body h1,
@@ -2724,7 +2731,7 @@ mark.search-keyword {
   vertical-align: middle;
 }
 .links-of-author a::before {
-  background: #33d7e4;
+  background: #ffcded;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);
