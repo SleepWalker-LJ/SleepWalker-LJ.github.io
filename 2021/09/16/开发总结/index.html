@@ -22,25 +22,28 @@
   <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="追寻探索未知的事物，感受生命的美好">
-<meta property="og:type" content="website">
-<meta property="og:title" content="SleepWalkerWorld">
-<meta property="og:url" content="http://example.com/index.html">
+<meta name="description" content="一，移动端开发经验 开始时进行分包 下拉刷新：如果是整个页面的刷新是写在外面的 样式的话，先写的差不多，再去调，不要写一下调一下，浪费时间 有些样式不好调的时候，可以直接在调试工具找到对应的元素或上级元素，直接写样式代码来调整。  样式布局 一般不写高度，通过padding来撑开元素 可以通过隐藏元素的方式来占位，实现特殊的布局 灵活使用flex布局的伸缩属性 使用scroll时，注意图片的高度，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="开发总结">
+<meta property="og:url" content="http://example.com/2021/09/16/%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/index.html">
 <meta property="og:site_name" content="SleepWalkerWorld">
-<meta property="og:description" content="追寻探索未知的事物，感受生命的美好">
+<meta property="og:description" content="一，移动端开发经验 开始时进行分包 下拉刷新：如果是整个页面的刷新是写在外面的 样式的话，先写的差不多，再去调，不要写一下调一下，浪费时间 有些样式不好调的时候，可以直接在调试工具找到对应的元素或上级元素，直接写样式代码来调整。  样式布局 一般不写高度，通过padding来撑开元素 可以通过隐藏元素的方式来占位，实现特殊的布局 灵活使用flex布局的伸缩属性 使用scroll时，注意图片的高度，">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-09-16T09:13:01.000Z">
+<meta property="article:modified_time" content="2021-09-16T09:38:51.354Z">
 <meta property="article:author" content="sleepwalker">
+<meta property="article:tag" content="notice">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://example.com/">
+<link rel="canonical" href="http://example.com/2021/09/16/%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2021/09/16/%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/","path":"2021/09/16/开发总结/","title":"开发总结"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>SleepWalkerWorld</title>
+<title>开发总结 | SleepWalkerWorld</title>
   
 
 
@@ -137,7 +140,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -150,6 +153,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%EF%BC%8C%E7%A7%BB%E5%8A%A8%E7%AB%AF"><span class="nav-number">1.</span> <span class="nav-text">一，移动端</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%80%E5%8F%91%E7%BB%8F%E9%AA%8C"><span class="nav-number">1.0.1.</span> <span class="nav-text">开发经验</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%B7%E5%BC%8F%E5%B8%83%E5%B1%80"><span class="nav-number">1.0.2.</span> <span class="nav-text">样式布局</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E5%8C%96"><span class="nav-number">1.0.3.</span> <span class="nav-text">优化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#uniapp"><span class="nav-number">1.0.4.</span> <span class="nav-text">uniapp</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%EF%BC%8C-%E6%95%B4%E4%BD%93%E9%A1%B9%E7%9B%AE"><span class="nav-number">2.</span> <span class="nav-text">二， 整体项目</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HACK"><span class="nav-number">2.0.1.</span> <span class="nav-text">HACK</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E9%83%A8%E5%88%86"><span class="nav-number">2.0.2.</span> <span class="nav-text">代码部分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84"><span class="nav-number">2.0.3.</span> <span class="nav-text">项目结构</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%EF%BC%8C%E5%BC%80%E5%8F%91%E6%B3%A8%E6%84%8F"><span class="nav-number">3.</span> <span class="nav-text">三，开发注意</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#vue"><span class="nav-number">3.0.1.</span> <span class="nav-text">vue</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E9%97%AE%E9%A2%98"><span class="nav-number">3.0.2.</span> <span class="nav-text">错误问题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%EF%BC%8C%E5%A5%BD%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">四，好的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-number">4.0.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="nav-number">4.0.2.</span> <span class="nav-text">快捷键</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -209,16 +213,17 @@
 </noscript>
 
 
-    <div class="main-inner index posts-expand">
+    <div class="main-inner post posts-expand">
 
-    
+
+  
 
 
 <div class="post-block">
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/16/%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -231,9 +236,9 @@
       <meta itemprop="name" content="SleepWalkerWorld">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/09/16/%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">开发总结</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          开发总结
+        </h1>
 
         <div class="post-meta-container">
           <div class="post-meta">
@@ -257,7 +262,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="一，移动端"><a href="#一，移动端" class="headerlink" title="一，移动端"></a>一，移动端</h2><h4 id="开发经验"><a href="#开发经验" class="headerlink" title="开发经验"></a>开发经验</h4><ol>
+        <h2 id="一，移动端"><a href="#一，移动端" class="headerlink" title="一，移动端"></a>一，移动端</h2><h4 id="开发经验"><a href="#开发经验" class="headerlink" title="开发经验"></a>开发经验</h4><ol>
 <li>开始时进行分包</li>
 <li>下拉刷新：如果是整个页面的刷新是写在外面的</li>
 <li>样式的话，先写的差不多，再去调，不要写一下调一下，浪费时间</li>
@@ -337,7 +342,6 @@
 </li>
 </ul>
 
-      
     </div>
 
     
@@ -345,168 +349,25 @@
     
 
     <footer class="post-footer">
-        <div class="post-eof"></div>
-      
+          <div class="post-tags">
+              <a href="/tags/notice/" rel="tag"># notice</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/09/14/%E6%A8%A1%E5%9D%97%E5%8C%96%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B/" rel="prev" title="模块化加载过程">
+                  <i class="fa fa-chevron-left"></i> 模块化加载过程
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
     </footer>
   </article>
 </div>
 
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/14/%E6%A8%A1%E5%9D%97%E5%8C%96%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="sleepwalker">
-      <meta itemprop="description" content="追寻探索未知的事物，感受生命的美好">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SleepWalkerWorld">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/09/14/%E6%A8%A1%E5%9D%97%E5%8C%96%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B/" class="post-title-link" itemprop="url">模块化加载过程</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2021-09-14 17:37:01 / 修改时间：20:55:10" itemprop="dateCreated datePublished" datetime="2021-09-14T17:37:01+08:00">2021-09-14</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h4 id="3-模块加载过程"><a href="#3-模块加载过程" class="headerlink" title="3. 模块加载过程"></a>3. 模块加载过程</h4><ul>
-<li>特点：require的文件，内部所有代码都会执行一遍</li>
-<li>cjs<ul>
-<li>特点：<ol>
-<li>是同步的，require的文件内容执行完才会执行下一行代码。</li>
-<li>模块被多次引入时，会缓存，最终只加载一次。<ul>
-<li>每个模块对象module都有一个属性：loaded</li>
-<li>false表示还没加载，true表示已加载</li>
-<li><img src="https://i.loli.net/2021/09/14/gfF715SR3TxC689.png" alt="image-20210914144231212"></li>
-</ul>
-</li>
-</ol>
-</li>
-</ul>
-</li>
-<li>es6</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/14/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="sleepwalker">
-      <meta itemprop="description" content="追寻探索未知的事物，感受生命的美好">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SleepWalkerWorld">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/09/14/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-09-14 14:17:45" itemprop="dateCreated datePublished" datetime="2021-09-14T14:17:45+08:00">2021-09-14</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
 
 
 

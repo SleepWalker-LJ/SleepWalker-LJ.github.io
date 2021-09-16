@@ -43,4 +43,91 @@
         <tag>node</tag>
       </tags>
   </entry>
+  <entry>
+    <title>开发总结</title>
+    <url>/2021/09/16/%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<h2 id="一，移动端"><a href="#一，移动端" class="headerlink" title="一，移动端"></a>一，移动端</h2><h4 id="开发经验"><a href="#开发经验" class="headerlink" title="开发经验"></a>开发经验</h4><ol>
+<li>开始时进行分包</li>
+<li>下拉刷新：如果是整个页面的刷新是写在外面的</li>
+<li>样式的话，先写的差不多，再去调，不要写一下调一下，浪费时间</li>
+<li>有些样式不好调的时候，可以直接在调试工具找到对应的元素或上级元素，直接写样式代码来调整。</li>
+</ol>
+<h4 id="样式布局"><a href="#样式布局" class="headerlink" title="样式布局"></a>样式布局</h4><ol>
+<li>一般不写高度，通过padding来撑开元素</li>
+<li>可以通过隐藏元素的方式来占位，实现特殊的布局</li>
+<li>灵活使用flex布局的伸缩属性</li>
+<li>使用scroll时，注意图片的高度，容易出现高度计算不够的问题</li>
+<li>使用v-for的margin-bottom（多余一个边距），可以用last-child来取消最后一个margin-bottom</li>
+</ol>
+<h4 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h4><ol>
+<li>加入骨架屏</li>
+<li>图片的预加载和懒加载</li>
+<li>微信开发者工具可以给自己的小程序打分，这样就可以针对性的进行优化</li>
+<li>小程序首屏加载优化</li>
+<li>小程序优化<a href="https://zhuanlan.zhihu.com/p/135983160">https://zhuanlan.zhihu.com/p/135983160</a></li>
+</ol>
+<h4 id="uniapp"><a href="#uniapp" class="headerlink" title="uniapp"></a>uniapp</h4><ol>
+<li>图片尽量加上高度，避免图片加载时突然宽高变化的问题</li>
+<li>配置esaycom，组件引入就很方便了</li>
+<li>利用微信开发者工具的mock来测试数据</li>
+<li>uniapp中的url不需要加@</li>
+</ol>
+<h2 id="二，-整体项目"><a href="#二，-整体项目" class="headerlink" title="二， 整体项目"></a>二， 整体项目</h2><h4 id="HACK"><a href="#HACK" class="headerlink" title="HACK"></a>HACK</h4><ol>
+<li>通过清空数据实现隐藏</li>
+</ol>
+<h4 id="代码部分"><a href="#代码部分" class="headerlink" title="代码部分"></a>代码部分</h4><ol>
+<li><p>回调层次过深时，使用promise来减少回调</p>
+</li>
+<li><p>给对象添加属性，如果只是调用就不需要拷贝</p>
+<ul>
+<li><pre><code class="JavaScript">this.listOne=res.map(it=&gt;&#123;
+    Object.assign(it,&#123;
+        isShow:false
+    &#125;)
+    return it
+&#125;)
+</code></pre>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h4><ol>
+<li>考虑后期的可维护性，页面尽量不封装，一旦后期加新的页面，就需要不断加入逻辑，容易出现冲突，封装组件即可。</li>
+<li>目录设计：<ul>
+<li>common：mixins混入    filters全局过滤器    config配置环境变量    datamap数据映射</li>
+</ul>
+</li>
+</ol>
+<h2 id="三，开发注意"><a href="#三，开发注意" class="headerlink" title="三，开发注意"></a>三，开发注意</h2><h4 id="vue"><a href="#vue" class="headerlink" title="vue"></a>vue</h4><ol>
+<li>插槽上写样式没用，替换了就没了</li>
+<li>引用组件，最后包裹起来使用，好写样式</li>
+<li>写组件的时候，注意传值时单向的，所以该数据去做响应的时候，要么传回去改，要么赋值到data中</li>
+</ol>
+<h4 id="错误问题"><a href="#错误问题" class="headerlink" title="错误问题"></a>错误问题</h4><ol>
+<li>如果前面代码报错，后面不会继续执行</li>
+<li>记得及时清除缓存，选择network里的清除缓存，就看不到from disk了</li>
+</ol>
+<h2 id="四，好的方法"><a href="#四，好的方法" class="headerlink" title="四，好的方法"></a>四，好的方法</h2><h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><ol>
+<li>写复杂的逻辑时，试着多记录，画图，写注释，记录自己的思路，不然脑子不够用，这个方法非常有用</li>
+<li>优先完成主体功能</li>
+</ol>
+<h4 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h4><ul>
+<li>webstorm:<ol>
+<li>ctrl+alt+方向键：去上一个或下一个光标的位置</li>
+</ol>
+</li>
+<li>hbuilderx:<ol>
+<li>alt+方向键：去上一个或下一个光标的位置</li>
+</ol>
+</li>
+<li>windows：<ul>
+<li> 剪贴板是win+v</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>notice</tag>
+      </tags>
+  </entry>
 </search>
