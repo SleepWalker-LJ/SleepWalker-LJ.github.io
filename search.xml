@@ -130,4 +130,36 @@
         <tag>notice</tag>
       </tags>
   </entry>
+  <entry>
+    <title>ES Module</title>
+    <url>/2021/09/16/ES-Module/</url>
+    <content><![CDATA[<h4 id="一，区别于commonJS"><a href="#一，区别于commonJS" class="headerlink" title="一，区别于commonJS"></a>一，区别于commonJS</h4><ul>
+<li>import和export是关键字</li>
+<li>采用编译器的静态分析，并且也加入了动态引用的方式（在代码解析阶段执行，所以不能写到逻辑代码中。逻辑代码是个执行过程）</li>
+</ul>
+<h4 id="二，语法"><a href="#二，语法" class="headerlink" title="二，语法"></a>二，语法</h4><p><strong>–导出–</strong></p>
+<p>​        导出的是变量的引用，就是地址，所以改动了值，导出的内容也会改变。</p>
+<p><img src="https://i.loli.net/2021/09/16/rkzM3xEtCj1KaY9.png" alt="image-20210916192559447"></p>
+<h6 id="方式一："><a href="#方式一：" class="headerlink" title="方式一："></a>方式一：</h6><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> name=<span class="string">&quot;why&quot;</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> sayHello=<span class="function"><span class="keyword">function</span>(<span class="params">name</span>)</span>&#123;</span><br><span class="line">    <span class="comment">// 方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="方式二：-中统一导出"><a href="#方式二：-中统一导出" class="headerlink" title="方式二：{} 中统一导出"></a>方式二：{} 中统一导出</h6><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// &#123;放置要导出的变量的引用列表&#125;</span></span><br><span class="line"><span class="keyword">export</span> &#123;</span><br><span class="line">	name,</span><br><span class="line">    sayHello</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="方式三：-导出时，可以给变量起别名"><a href="#方式三：-导出时，可以给变量起别名" class="headerlink" title="方式三：{} 导出时，可以给变量起别名"></a>方式三：{} 导出时，可以给变量起别名</h6><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> &#123;</span><br><span class="line">	name <span class="keyword">as</span> FName,</span><br><span class="line">    sayHello <span class="keyword">as</span> FSayHello</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>–导入–</strong></p>
+<h6 id="方式一：-1"><a href="#方式一：-1" class="headerlink" title="方式一："></a>方式一：</h6><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 这里的&#123;&#125;不是对象</span></span><br><span class="line"><span class="keyword">import</span> &#123;name,sayHello&#125; <span class="keyword">from</span> <span class="string">&#x27;./xx/xx.js&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h6 id="方式二：-导出变量之后可以起别名"><a href="#方式二：-导出变量之后可以起别名" class="headerlink" title="方式二：{} 导出变量之后可以起别名"></a>方式二：{} 导出变量之后可以起别名</h6><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 这里的&#123;&#125;不是对象</span></span><br><span class="line"><span class="keyword">import</span> &#123;name <span class="keyword">as</span> oName,sayHello <span class="keyword">as</span> oSayHello&#125; <span class="keyword">from</span> <span class="string">&#x27;./xx/xx.js&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h6 id="方式三：-as-foo"><a href="#方式三：-as-foo" class="headerlink" title="方式三：*  as foo"></a>方式三：*  as foo</h6><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 放入一个对象中</span></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> foo <span class="keyword">from</span> <span class="string">&#x27;./xx/xx.js&#x27;</span></span><br><span class="line">foo.name</span><br></pre></td></tr></table></figure>
+
+<p> <strong>–default–</strong></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    方法（）</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">import</span> 自定义名字 <span class="keyword">from</span> <span class="string">&quot;./x&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>注意：一个模块只有一个default</p>
+]]></content>
+      <tags>
+        <tag>node</tag>
+      </tags>
+  </entry>
 </search>
