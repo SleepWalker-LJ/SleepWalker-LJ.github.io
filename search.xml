@@ -4,6 +4,8 @@
     <title>Hello World</title>
     <url>/2021/09/14/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<span id="more"></span>
+
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
 
 <p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
@@ -21,7 +23,9 @@
   <entry>
     <title>模块化加载过程</title>
     <url>/2021/09/14/%E6%A8%A1%E5%9D%97%E5%8C%96%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B/</url>
-    <content><![CDATA[<h4 id="3-模块加载过程"><a href="#3-模块加载过程" class="headerlink" title="3. 模块加载过程"></a>3. 模块加载过程</h4><ul>
+    <content><![CDATA[<h4 id="3-模块加载过程"><a href="#3-模块加载过程" class="headerlink" title="3. 模块加载过程"></a>3. 模块加载过程</h4><span id="more"></span>
+
+<ul>
 <li>特点：require的文件，内部所有代码都会执行一遍</li>
 <li>cjs<ul>
 <li>特点：<ol>
@@ -51,6 +55,8 @@
 <li>样式的话，先写的差不多，再去调，不要写一下调一下，浪费时间</li>
 <li>有些样式不好调的时候，可以直接在调试工具找到对应的元素或上级元素，直接写样式代码来调整。</li>
 </ol>
+<span id="more"></span>
+
 <h4 id="样式布局"><a href="#样式布局" class="headerlink" title="样式布局"></a>样式布局</h4><ol>
 <li>一般不写高度，通过padding来撑开元素</li>
 <li>可以通过隐藏元素的方式来占位，实现特殊的布局</li>
@@ -132,7 +138,9 @@
   <entry>
     <title>ES Module</title>
     <url>/2021/09/16/ES-Module/</url>
-    <content><![CDATA[<h4 id="一，区别于commonJS"><a href="#一，区别于commonJS" class="headerlink" title="一，区别于commonJS"></a>一，区别于commonJS</h4><ul>
+    <content><![CDATA[<h4 id="一，区别于commonJS"><a href="#一，区别于commonJS" class="headerlink" title="一，区别于commonJS"></a>一，区别于commonJS</h4><span id="more"></span>
+
+<ul>
 <li>import和export是关键字</li>
 <li>采用编译器的静态分析，并且也加入了动态引用的方式（在代码解析阶段执行，所以不能写到逻辑代码中。逻辑代码是个执行过程）</li>
 </ul>
@@ -156,7 +164,198 @@
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    方法（）</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">import</span> 自定义名字 <span class="keyword">from</span> <span class="string">&quot;./x&quot;</span></span><br></pre></td></tr></table></figure>
 
 <p>注意：一个模块只有一个default</p>
+<h4 id="三，ConmonJS和ES-Module交互"><a href="#三，ConmonJS和ES-Module交互" class="headerlink" title="三，ConmonJS和ES Module交互"></a>三，ConmonJS和ES Module交互</h4><ul>
+<li>通常情况下，cjs不能加载ES Module</li>
+<li>多数情况下，ES Module可以加载cjs</li>
+</ul>
 ]]></content>
+      <tags>
+        <tag>node</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Node常用内置模块</title>
+    <url>/2021/09/17/Node%E5%B8%B8%E7%94%A8%E5%86%85%E7%BD%AE%E6%A8%A1%E5%9D%97/</url>
+    <content><![CDATA[<blockquote>
+<p>更多内容去查看官方文档</p>
+</blockquote>
+<h2 id="一，path"><a href="#一，path" class="headerlink" title="一，path"></a>一，path</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 1. resolve：路径拼接，避免在不同操作系统的路径符号问题，如&#x27;/和\&#x27;</span></span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> basePath=<span class="string">&quot;\\user\\why&quot;</span></span><br><span class="line"><span class="keyword">const</span> fileName=<span class="string">&quot;abc.txt&quot;</span></span><br><span class="line"><span class="keyword">const</span> filePath=path.resolve(basePath,fileName)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;1. &quot;</span>+filePath);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 路径信息</span></span><br><span class="line"><span class="comment">// 获取文件路径</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;2. &quot;</span>+path.dirname(filePath));</span><br><span class="line"><span class="comment">// 获取文件名</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;2. &quot;</span>+path.basename(filePath));</span><br><span class="line"><span class="comment">// 获取文件后缀名</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;2. &quot;</span>+path.extname(filePath));</span><br><span class="line"></span><br><span class="line"><span class="comment">// join：路径拼接</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;3. &quot;</span>+path.join(basePath,fileName))</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/09/17/VobA64cUv3Z9smi.png" alt="image-20210917193128602"></p>
+<h2 id="二，File-System"><a href="#二，File-System" class="headerlink" title="二，File System"></a>二，File System</h2><blockquote>
+<p>文件的API大多数都提供三种操作方式，一般都有promises方法</p>
+</blockquote>
+<ol>
+<li>同步操作文件：代码会被阻塞，不会继续执行</li>
+<li>异步回调函数操作文件：代码不会被阻塞，需要传入回调函数，当获取到结果时，回调函数被执行</li>
+<li>异步Promise操作文件：代码不会被阻塞，通过 fs.promises 调用方法操作，会返回一个Promise， 可以通过then、catch进行处理</li>
+</ol>
+<h3 id="1-三种使用方式："><a href="#1-三种使用方式：" class="headerlink" title="1. 三种使用方式："></a>1. 三种使用方式：</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> fs=<span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br><span class="line"><span class="comment">// 1. 读取文件信息</span></span><br><span class="line"><span class="keyword">const</span> filePath=(<span class="string">&#x27;./a.txt&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 方式一：同步操作</span></span><br><span class="line"><span class="keyword">const</span> info=fs.statSync(filePath)</span><br><span class="line"><span class="comment">// console.log(&#x27;后续需要执行的代码&#x27;);</span></span><br><span class="line"><span class="comment">// console.log(info);</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 方式二：异步操作</span></span><br><span class="line">fs.stat(filePath,<span class="function">(<span class="params">err,info</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(err)&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(err);</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(info);</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;因为没阻塞，所以先执行了下面的代码&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 方式三：promise</span></span><br><span class="line">fs.promises.stat(filePath).then(<span class="function"><span class="params">info</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(info);</span><br><span class="line">&#125;).catch(<span class="function"><span class="params">err</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(err);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-文件描述符"><a href="#2-文件描述符" class="headerlink" title="2. 文件描述符"></a>2. 文件描述符</h3><blockquote>
+<p><a href="https://baike.baidu.com/item/%E6%96%87%E4%BB%B6%E6%8F%8F%E8%BF%B0%E7%AC%A6/9809582?fr=aladdin">https://baike.baidu.com/item/%E6%96%87%E4%BB%B6%E6%8F%8F%E8%BF%B0%E7%AC%A6/9809582?fr=aladdin</a></p>
+</blockquote>
+<h3 id="3-文件读写"><a href="#3-文件读写" class="headerlink" title="3. 文件读写"></a>3. 文件读写</h3><ul>
+<li>w 打开文件写入，默认值；</li>
+<li>w+打开文件进行读写，如果不存在则创建文件；</li>
+<li>r+ 打开文件进行读写，如果不存在那么抛出异常；</li>
+<li>r打开文件读取，读取时的默认值； </li>
+<li>a打开要写入的文件，将流放在文件末尾。如果不存在则创建文件； </li>
+<li>a+打开文件以进行读写，将流放在文件末尾。如果不存在则创建文件</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 1. 文件写入</span></span><br><span class="line"><span class="keyword">const</span> content=<span class="string">&quot;你好呀，小叶子&quot;</span></span><br><span class="line"><span class="keyword">const</span> appen=<span class="string">&quot;我们有机会嘛&quot;</span></span><br><span class="line">fs.writeFile(<span class="string">&#x27;./a.txt&#x27;</span>,appen,&#123;<span class="attr">flag</span>:<span class="string">&quot;a&quot;</span>&#125;,<span class="function"><span class="params">err</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(err);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 文件读取 默认读出来的是buffer</span></span><br><span class="line">fs.readFile(<span class="string">&quot;./a.txt&quot;</span>,&#123;<span class="attr">encoding</span>:<span class="string">&#x27;utf-8&#x27;</span>&#125;,<span class="function">(<span class="params">err,data</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(data);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-文件夹操作"><a href="#4-文件夹操作" class="headerlink" title="4. 文件夹操作"></a>4. 文件夹操作</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> path=<span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 1. 创建文件夹</span></span><br><span class="line"><span class="keyword">const</span> dirname=<span class="string">&#x27;./why&#x27;</span></span><br><span class="line"><span class="keyword">if</span>(!fs.existsSync(dirname))&#123;</span><br><span class="line">    fs.mkdir(dirname,<span class="function"><span class="params">err</span>=&gt;</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(err);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 读取文件夹中所有文件</span></span><br><span class="line">fs.readdir(dirname,<span class="function">(<span class="params">err,files</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(files);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 读取当前文件夹下所有文件，通过递归的方式</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getFiles</span>(<span class="params">dirname</span>)</span>&#123;</span><br><span class="line">    fs.readdir(dirname,&#123;<span class="attr">withFileTypes</span>:<span class="literal">true</span>&#125;,<span class="function">(<span class="params">err,files</span>)=&gt;</span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> file <span class="keyword">of</span> files)&#123;</span><br><span class="line">            <span class="keyword">if</span>(file.isDirectory())&#123;</span><br><span class="line">                <span class="keyword">const</span> filepath = path.resolve(dirname,file.name)</span><br><span class="line">                getFiles(filepath)</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="built_in">console</span>.log(file.name);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line">getFiles(dirname)</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-写node脚本的注意点"><a href="#5-写node脚本的注意点" class="headerlink" title="5. 写node脚本的注意点"></a>5. 写node脚本的注意点</h3><ul>
+<li>传值：使用process.argv[x]来读取传入的参数</li>
+<li>.padStart(2,0)：这个方法可以补齐0 ，如01,02</li>
+</ul>
+<h2 id="三，event模块"><a href="#三，event模块" class="headerlink" title="三，event模块"></a>三，event模块</h2><blockquote>
+<p>类似人体的反应，比如手摸火，手发射事件，大脑监听做出已经设置好的反应。</p>
+</blockquote>
+<ul>
+<li>Node中的核心API都是基于异步事件驱动的<ul>
+<li>在这个体系中，某些对象（发射器（Emitters））发出某一个 事件</li>
+<li>我们可以监听这个事件（监听器 Listeners），并且传入的回 调函数，这个回调函数会在监听到事件时调用</li>
+</ul>
+</li>
+<li>发出事件和监听事件都是通过EventEmitter类来完成的，它们都属 于events对象<ul>
+<li>emitter.on(eventName, listener)：监听事件，也可以使用 addListener</li>
+<li>emitter.off(eventName, listener)：移除事件监听，也可以使 用removeListener</li>
+<li>emitter.emit(eventName[, …args])：发出事件，可以携带一 些参数</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> EventEmitter=<span class="built_in">require</span>(<span class="string">&#x27;events&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 1. 创建发射器</span></span><br><span class="line"><span class="keyword">const</span> emitter = <span class="keyword">new</span> EventEmitter()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 监听某一个事件 addListener 是on的alias简写</span></span><br><span class="line">emitter.on(<span class="string">&#x27;click&#x27;</span>,<span class="function">(<span class="params">args</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;监听1到click事件&#x27;</span>,args);</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">const</span> lis2=<span class="function">(<span class="params">args</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;监听2到click事件&#x27;</span>,args);</span><br><span class="line">&#125;</span><br><span class="line">emitter.on(<span class="string">&#x27;click&#x27;</span>,lis2)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. 发出一个事件</span></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">    emitter.emit(<span class="string">&#x27;click&#x27;</span>,<span class="string">&#x27;露西&#x27;</span>,<span class="string">&#x27;艾尔莎&#x27;</span>)</span><br><span class="line">    <span class="comment">// 取消</span></span><br><span class="line">    emitter.off(<span class="string">&#x27;click&#x27;</span>,lis2)</span><br><span class="line">    emitter.emit(<span class="string">&#x27;click&#x27;</span>,<span class="string">&#x27;露西&#x27;</span>,<span class="string">&#x27;艾尔莎&#x27;</span>)</span><br><span class="line">&#125;,<span class="number">1000</span>)</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <tags>
+        <tag>node</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>包管理工具</title>
+    <url>/2021/09/19/%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/</url>
+    <content><![CDATA[<h2 id="一，项目配置文件"><a href="#一，项目配置文件" class="headerlink" title="一，项目配置文件"></a>一，项目配置文件</h2><ul>
+<li>事实上，我们每一个项目都会有一个对应的配置文件，无论是前端项目还是后端项目<ul>
+<li>这个配置文件会记录着你项目的名称、版本号、项目描述等</li>
+<li>也会记录着你项目所依赖的其他库的信息和依赖库的版本号</li>
+</ul>
+</li>
+<li>这个配置文件在Node环境下面（无论是前端还是后端）就是package.json（npm init）</li>
+</ul>
+<h2 id="二，常见的属性"><a href="#二，常见的属性" class="headerlink" title="二，常见的属性"></a>二，常见的属性</h2><ul>
+<li>必须填写的属性：name、version<ul>
+<li>name是项目的名称</li>
+<li>version是当前项目的版本号</li>
+<li>description是描述信息，很多时候是作为项目的基本描述</li>
+<li>author是作者相关信息（发布时用到）</li>
+<li>license是开源协议（发布时用到）</li>
+</ul>
+</li>
+<li>private属性<ul>
+<li>private属性记录当前的项目是否是私有的</li>
+<li>当值为true时，npm是不能发布它的，这是防止私有项目或模块发布出去的方式</li>
+</ul>
+</li>
+<li>main属性<ul>
+<li>设置程序的入口</li>
+</ul>
+</li>
+<li>scripts属性<ul>
+<li>scripts属性用于配置一些脚本命令，以键值对的形式存在</li>
+<li>配置后我们可以通过 npm run 命令的key来执行这个命令</li>
+<li>npm start和npm run start的区别是什么？<ol>
+<li>它们是等价的</li>
+<li>对于常用的 start、 test、stop、restart可以省略掉run直接通过 npm start等方式运行</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>dependencies属性<ul>
+<li>dependencies属性是指定无论开发环境还是生成环境都需要依赖的包</li>
+<li>通常是我们项目实际开发用到的一些库模块</li>
+<li>与之对应的是devDependencies</li>
+</ul>
+</li>
+<li>devDependencies属性<ul>
+<li>一些包在生成环境是不需要的，比如webpack、babel等</li>
+<li><strong>这个时候我们会通过 npm install webpack –save-dev，将它安装到devDependencies属性中</strong></li>
+<li>npm的包通常需要遵从semver版本规范<ul>
+<li>X主版本号（major）：当你做了不兼容的 API 修改（可能不兼容之前的版本）</li>
+<li>Y次版本号（minor）：当你做了向下兼容的功能性新增（新功能增加，但是兼容之前的版本）</li>
+<li>Z修订号（patch）：当你做了向下兼容的问题修正（没有新功能，修复了之前版本的bug）</li>
+</ul>
+</li>
+<li>^x.y.z：表示x是保持不变的，y和z永远安装最新的版本</li>
+<li>~x.y.z：表示x和y保持不变的，z永远安装最新的版本</li>
+</ul>
+</li>
+<li>engines属性 <ul>
+<li>engines属性用于指定Node和NPM的版本号</li>
+<li>在安装的过程中，会先检查对应的引擎版本，如果不符合就会报错</li>
+<li>事实上也可以指定所在的操作系统 “os” : [ “darwin”, “linux” ]，只是很少用到</li>
+</ul>
+</li>
+<li>browserslist属性<ul>
+<li>用于配置打包后的JavaScript浏览器的兼容情况，参考</li>
+<li>否则我们需要手动的添加polyfills来让支持某些语法</li>
+<li>也就是说它是为webpack等打包工具服务的一个属性（这里不是详细讲解webpack等工具的工作原理，所以 不再给出详情）</li>
+</ul>
+</li>
+</ul>
+<h2 id="三，npm-install-命令"><a href="#三，npm-install-命令" class="headerlink" title="三，npm install 命令"></a>三，npm install 命令</h2><p><img src="https://i.loli.net/2021/09/19/6MnPBjNXpkhaAZH.png" alt="image-20210919163733316"></p>
+<ul>
+<li>npm install会检测是有package-lock.json文件<ul>
+<li>没有lock文件<ol>
+<li>分析依赖关系，这是因为我们可能包会依赖其他的包，并且多个包之间会产生相同依赖的情况； </li>
+<li>从registry仓库中下载压缩包（如果我们设置了镜像，那么会从镜像服务器下载压缩包）； </li>
+<li>获取到压缩包后会对压缩包进行缓存（从npm5开始有的）； </li>
+<li>将压缩包解压到项目的node_modules文件夹中（前面我们讲过，require的查找顺序会在该包下面查找）</li>
+</ol>
+</li>
+<li>有lock文件<ol>
+<li>检测lock中包的版本是否和package.json中一致（会按照semver版本规范检测）<ul>
+<li>不一致，那么会重新构建依赖关系，直接会走顶层的流程</li>
+</ul>
+</li>
+<li>一致的情况下，会去优先查找缓存<ul>
+<li>没有找到，会从registry仓库下载，直接走顶层流程</li>
+</ul>
+</li>
+<li>查找到，会获取缓存中的压缩文件，并且将压缩文件解压到node_modules文件夹中</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="四，package-lock-json"><a href="#四，package-lock-json" class="headerlink" title="四，package-lock.json"></a>四，package-lock.json</h2><ul>
+<li>name：项目的名称</li>
+<li>version：项目的版本</li>
+<li>lockfileVersion：lock文件的版本</li>
+<li>requires：使用requires来跟着模块的依赖关系</li>
+<li>dependencies：项目的依赖<ul>
+<li>当前项目依赖axios，但是axios依赖follow-redireacts；</li>
+<li>axios中的属性如下<ol>
+<li>version表示实际安装的axios的版本</li>
+<li>resolved用来记录下载的地址，registry仓库中的位置</li>
+<li>requires记录当前模块的依赖</li>
+<li>integrity用来从缓存中获取索引，再通过索引去获取压缩包文件</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>node</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Buffer</title>
+    <url>/2021/09/22/Buffer/</url>
+    <content><![CDATA[]]></content>
       <tags>
         <tag>node</tag>
       </tags>

@@ -22,16 +22,16 @@
   <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="3. 模块加载过程 特点：require的文件，内部所有代码都会执行一遍 cjs 特点： 是同步的，require的文件内容执行完才会执行下一行代码。 模块被多次引入时，会缓存，最终只加载一次。 每个模块对象module都有一个属性：loaded false表示还没加载，true表示已加载">
+<meta name="description" content="3. 模块加载过程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="模块化加载过程">
 <meta property="og:url" content="http://example.com/2021/09/14/%E6%A8%A1%E5%9D%97%E5%8C%96%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B/index.html">
 <meta property="og:site_name" content="SleepWalkerWorld">
-<meta property="og:description" content="3. 模块加载过程 特点：require的文件，内部所有代码都会执行一遍 cjs 特点： 是同步的，require的文件内容执行完才会执行下一行代码。 模块被多次引入时，会缓存，最终只加载一次。 每个模块对象module都有一个属性：loaded false表示还没加载，true表示已加载">
+<meta property="og:description" content="3. 模块加载过程">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://i.loli.net/2021/09/14/gfF715SR3TxC689.png">
 <meta property="article:published_time" content="2021-09-14T09:37:01.000Z">
-<meta property="article:modified_time" content="2021-09-17T01:59:44.205Z">
+<meta property="article:modified_time" content="2021-09-17T04:31:51.685Z">
 <meta property="article:author" content="sleepwalker">
 <meta property="article:tag" content="node">
 <meta name="twitter:card" content="summary">
@@ -170,7 +170,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -257,10 +257,17 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-09-17 09:59:44" itemprop="dateModified" datetime="2021-09-17T09:59:44+08:00">2021-09-17</time>
+        <time title="修改时间：2021-09-17 12:31:51" itemprop="dateModified" datetime="2021-09-17T12:31:51+08:00">2021-09-17</time>
       </span>
 
   
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
 </div>
 
         </div>
@@ -270,7 +277,9 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h4 id="3-模块加载过程"><a href="#3-模块加载过程" class="headerlink" title="3. 模块加载过程"></a>3. 模块加载过程</h4><ul>
+        <h4 id="3-模块加载过程"><a href="#3-模块加载过程" class="headerlink" title="3. 模块加载过程"></a>3. 模块加载过程</h4><span id="more"></span>
+
+<ul>
 <li>特点：require的文件，内部所有代码都会执行一遍</li>
 <li>cjs<ul>
 <li>特点：<ol>
@@ -336,6 +345,24 @@
   </span>
   <span class="author" itemprop="copyrightHolder">sleepwalker</span>
 </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
   <div class="powered-by">由肖哥 hero 强力驱动
   </div><script color="100,100,100" opacity="0.5" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
 
@@ -356,6 +383,7 @@
   <script src="/js/third-party/pace.js"></script>
 
   
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 
