@@ -30,7 +30,7 @@
 <meta property="og:description" content="一，移动端开发经验 开始时进行分包 下拉刷新：如果是整个页面的刷新是写在外面的 样式的话，先写的差不多，再去调，不要写一下调一下，浪费时间 有些样式不好调的时候，可以直接在调试工具找到对应的元素或上级元素，直接写样式代码来调整。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-09-16T09:13:01.000Z">
-<meta property="article:modified_time" content="2021-09-17T03:51:12.520Z">
+<meta property="article:modified_time" content="2021-09-28T07:56:25.718Z">
 <meta property="article:author" content="sleepwalker">
 <meta property="article:tag" content="notice">
 <meta name="twitter:card" content="summary">
@@ -168,7 +168,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-count">9</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -255,7 +255,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-09-17 11:51:12" itemprop="dateModified" datetime="2021-09-17T11:51:12+08:00">2021-09-17</time>
+        <time title="修改时间：2021-09-28 15:56:25" itemprop="dateModified" datetime="2021-09-28T15:56:25+08:00">2021-09-28</time>
       </span>
 
   
@@ -289,19 +289,30 @@
 <li>灵活使用flex布局的伸缩属性</li>
 <li>使用scroll时，注意图片的高度，容易出现高度计算不够的问题</li>
 <li>使用v-for的margin-bottom（多余一个边距），可以用last-child来取消最后一个margin-bottom</li>
+<li>布局尽量使用类名，其他特殊的选择器在修改的时候容易出问题</li>
 </ol>
 <h4 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h4><ol>
-<li>加入骨架屏</li>
+<li>加入骨架屏，刚开始设计页面的时候就考虑骨架屏</li>
 <li>图片的预加载和懒加载</li>
 <li>微信开发者工具可以给自己的小程序打分，这样就可以针对性的进行优化</li>
 <li>小程序首屏加载优化</li>
+<li>优化时，看看uniapp官方文档的优化建议</li>
+<li>在 uni-app 中，定义在 data 里面的数据每次变化时都会通知视图层重新渲染页面。所以如果不是视图所需要的变量，可以不定义在 data 中，可在外部定义变量或直接挂载在vue实例上，以避免造成资源浪费</li>
 <li>小程序优化<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/135983160">https://zhuanlan.zhihu.com/p/135983160</a></li>
+<li><strong>用户体验</strong><ul>
+<li>点击效果，及时反馈</li>
+<li>动画效果，眼前一亮</li>
+</ul>
+</li>
 </ol>
 <h4 id="uniapp"><a href="#uniapp" class="headerlink" title="uniapp"></a>uniapp</h4><ol>
 <li>图片尽量加上高度，避免图片加载时突然宽高变化的问题</li>
 <li>配置esaycom，组件引入就很方便了</li>
 <li>利用微信开发者工具的mock来测试数据</li>
 <li>uniapp中的url不需要加@</li>
+<li>uni.previewImage  urls需要数组</li>
+<li>ios的Date不支持2020-10-1 .replace(/-/g,’/‘)  要替换成/</li>
+<li>当前页面的改变会改变上个页面的状态时，使用onShow来刷新。</li>
 </ol>
 <h2 id="二，-整体项目"><a href="#二，-整体项目" class="headerlink" title="二， 整体项目"></a>二， 整体项目</h2><h4 id="HACK"><a href="#HACK" class="headerlink" title="HACK"></a>HACK</h4><ol>
 <li>通过清空数据实现隐藏</li>
@@ -324,6 +335,8 @@
 </ol>
 <h4 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h4><ol>
 <li>考虑后期的可维护性，页面尽量不封装，一旦后期加新的页面，就需要不断加入逻辑，容易出现冲突，封装组件即可。</li>
+<li>单一功能的逻辑抽离成函数？把不互相影响的逻辑抽离，不断抽象和细化，有单一功能尽量抽离，然后在上层进行组合？（再研究）</li>
+<li>用一个对象，这个对象是实现功能的，然后有很多函数，需要增加功能就拓展函数，保证函数单一职责原则，和开发封闭原则，千万不能像加补丁一样，动一发牵全身，而应该设计好上层框架，然后功能点就像换转装备一样，保证核心框架不变。  简单联动，进行高度抽象，抽象的本质应该就是为了解耦   功能模块是组件化，函数功能的话不太一样（再研究）</li>
 <li>目录设计：<ul>
 <li>common：mixins混入    filters全局过滤器    config配置环境变量    datamap数据映射</li>
 </ul>
@@ -333,6 +346,7 @@
 <li>插槽上写样式没用，替换了就没了</li>
 <li>引用组件，最后包裹起来使用，好写样式</li>
 <li>写组件的时候，注意传值时单向的，所以该数据去做响应的时候，要么传回去改，要么赋值到data中</li>
+<li>tinymce富文本编辑器，清除内容可以通过      :destroy-on-close=”true”</li>
 </ol>
 <h4 id="错误问题"><a href="#错误问题" class="headerlink" title="错误问题"></a>错误问题</h4><ol>
 <li>如果前面代码报错，后面不会继续执行</li>
@@ -341,6 +355,7 @@
 <h2 id="四，好的方法"><a href="#四，好的方法" class="headerlink" title="四，好的方法"></a>四，好的方法</h2><h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><ol>
 <li>写复杂的逻辑时，试着多记录，画图，写注释，记录自己的思路，不然脑子不够用，这个方法非常有用</li>
 <li>优先完成主体功能</li>
+<li>复杂逻辑多写注释，后面维护或修改的时候一目了然，并且尽量减少代码的耦合度，不然修改的时候容易产生连锁反应</li>
 </ol>
 <h4 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h4><ul>
 <li>webstorm:<ol>

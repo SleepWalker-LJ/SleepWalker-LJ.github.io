@@ -63,19 +63,30 @@
 <li>灵活使用flex布局的伸缩属性</li>
 <li>使用scroll时，注意图片的高度，容易出现高度计算不够的问题</li>
 <li>使用v-for的margin-bottom（多余一个边距），可以用last-child来取消最后一个margin-bottom</li>
+<li>布局尽量使用类名，其他特殊的选择器在修改的时候容易出问题</li>
 </ol>
 <h4 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h4><ol>
-<li>加入骨架屏</li>
+<li>加入骨架屏，刚开始设计页面的时候就考虑骨架屏</li>
 <li>图片的预加载和懒加载</li>
 <li>微信开发者工具可以给自己的小程序打分，这样就可以针对性的进行优化</li>
 <li>小程序首屏加载优化</li>
+<li>优化时，看看uniapp官方文档的优化建议</li>
+<li>在 uni-app 中，定义在 data 里面的数据每次变化时都会通知视图层重新渲染页面。所以如果不是视图所需要的变量，可以不定义在 data 中，可在外部定义变量或直接挂载在vue实例上，以避免造成资源浪费</li>
 <li>小程序优化<a href="https://zhuanlan.zhihu.com/p/135983160">https://zhuanlan.zhihu.com/p/135983160</a></li>
+<li><strong>用户体验</strong><ul>
+<li>点击效果，及时反馈</li>
+<li>动画效果，眼前一亮</li>
+</ul>
+</li>
 </ol>
 <h4 id="uniapp"><a href="#uniapp" class="headerlink" title="uniapp"></a>uniapp</h4><ol>
 <li>图片尽量加上高度，避免图片加载时突然宽高变化的问题</li>
 <li>配置esaycom，组件引入就很方便了</li>
 <li>利用微信开发者工具的mock来测试数据</li>
 <li>uniapp中的url不需要加@</li>
+<li>uni.previewImage  urls需要数组</li>
+<li>ios的Date不支持2020-10-1 .replace(/-/g,’/‘)  要替换成/</li>
+<li>当前页面的改变会改变上个页面的状态时，使用onShow来刷新。</li>
 </ol>
 <h2 id="二，-整体项目"><a href="#二，-整体项目" class="headerlink" title="二， 整体项目"></a>二， 整体项目</h2><h4 id="HACK"><a href="#HACK" class="headerlink" title="HACK"></a>HACK</h4><ol>
 <li>通过清空数据实现隐藏</li>
@@ -98,6 +109,8 @@
 </ol>
 <h4 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h4><ol>
 <li>考虑后期的可维护性，页面尽量不封装，一旦后期加新的页面，就需要不断加入逻辑，容易出现冲突，封装组件即可。</li>
+<li>单一功能的逻辑抽离成函数？把不互相影响的逻辑抽离，不断抽象和细化，有单一功能尽量抽离，然后在上层进行组合？（再研究）</li>
+<li>用一个对象，这个对象是实现功能的，然后有很多函数，需要增加功能就拓展函数，保证函数单一职责原则，和开发封闭原则，千万不能像加补丁一样，动一发牵全身，而应该设计好上层框架，然后功能点就像换转装备一样，保证核心框架不变。  简单联动，进行高度抽象，抽象的本质应该就是为了解耦   功能模块是组件化，函数功能的话不太一样（再研究）</li>
 <li>目录设计：<ul>
 <li>common：mixins混入    filters全局过滤器    config配置环境变量    datamap数据映射</li>
 </ul>
@@ -107,6 +120,7 @@
 <li>插槽上写样式没用，替换了就没了</li>
 <li>引用组件，最后包裹起来使用，好写样式</li>
 <li>写组件的时候，注意传值时单向的，所以该数据去做响应的时候，要么传回去改，要么赋值到data中</li>
+<li>tinymce富文本编辑器，清除内容可以通过      :destroy-on-close=”true”</li>
 </ol>
 <h4 id="错误问题"><a href="#错误问题" class="headerlink" title="错误问题"></a>错误问题</h4><ol>
 <li>如果前面代码报错，后面不会继续执行</li>
@@ -115,6 +129,7 @@
 <h2 id="四，好的方法"><a href="#四，好的方法" class="headerlink" title="四，好的方法"></a>四，好的方法</h2><h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><ol>
 <li>写复杂的逻辑时，试着多记录，画图，写注释，记录自己的思路，不然脑子不够用，这个方法非常有用</li>
 <li>优先完成主体功能</li>
+<li>复杂逻辑多写注释，后面维护或修改的时候一目了然，并且尽量减少代码的耦合度，不然修改的时候容易产生连锁反应</li>
 </ol>
 <h4 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h4><ul>
 <li>webstorm:<ol>
@@ -415,7 +430,97 @@
 <p>理解：类似完成任务，任务不断进入执行阶段（压栈），做完就出栈。（函数定义的时候没有执行，没有压栈）</p>
 </blockquote>
 <p><img src="https://i.loli.net/2021/09/24/MNe6Qr3RZwHCjJY.png" alt="image-20210924132629101"></p>
-<h1 id="二，异步IO"><a href="#二，异步IO" class="headerlink" title="二，异步IO"></a>二，异步IO</h1>]]></content>
+<h2 id="5-浏览器的事件循环"><a href="#5-浏览器的事件循环" class="headerlink" title="5. 浏览器的事件循环"></a>5. 浏览器的事件循环</h2><ul>
+<li> 如果在执行JavaScript代码的过程中，有异步操作呢？</li>
+<li>中间我们插入了一个setTimeout的函数调用</li>
+<li>这个函数被放到入调用栈中，执行会立即结束，并不会阻塞后续代码的执行</li>
+<li>那么，传入的一个函数（比如我们称之为timer函数），会在什么时候被执行呢？<ul>
+<li>事实上，setTimeout是调用了web api，在合适的时机，会将timer函数加入到一个事件队列中</li>
+<li>事件队列中的函数，会被放入到调用栈中，在调用栈中被执行</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>回调函数都会放到事件队列中。</p>
+</blockquote>
+<p><img src="https://i.loli.net/2021/09/24/bgrWTAfzRV1G7wK.png" alt="image-20210924193900537"></p>
+<h2 id="6-宏任务和微任务"><a href="#6-宏任务和微任务" class="headerlink" title="6. 宏任务和微任务"></a>6. 宏任务和微任务</h2><blockquote>
+<p>理解：微任务是高优先级任务，一出现就执行</p>
+</blockquote>
+<ul>
+<li>main script中的代码优先执行（编写的顶层script代码）</li>
+<li>在执行任何一个宏任务之前（不是队列，是一个宏任务），都会先查看微任务队列中是否有任务需要执行<ul>
+<li>在执行任何一个宏任务之前（不是队列，是一个宏任务），都会先查看微任务队列中是否有任务需要执行</li>
+<li>如果不为空，那么久优先执行微任务队列中的任务（回调）</li>
+</ul>
+</li>
+</ul>
+<h2 id="7-面试题分析，asyc，await"><a href="#7-面试题分析，asyc，await" class="headerlink" title="7. 面试题分析，asyc，await"></a>7. 面试题分析，asyc，await</h2><h1 id="二，异步IO"><a href="#二，异步IO" class="headerlink" title="二，异步IO"></a>二，异步IO</h1>]]></content>
+      <tags>
+        <tag>node</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MongoDB和Node</title>
+    <url>/2021/09/29/MongoDB%E5%92%8CNode/</url>
+    <content><![CDATA[<h1 id="MongoDB和Node"><a href="#MongoDB和Node" class="headerlink" title="MongoDB和Node"></a>MongoDB和Node</h1><h2 id="一，-连接"><a href="#一，-连接" class="headerlink" title="一， 连接"></a>一， 连接</h2><ol>
+<li><p>需要依赖Node.js第三方包mongoose</p>
+</li>
+<li><p>启动服务（同msql，SqlServer等）： net start(stop) mongoDB</p>
+</li>
+<li><p>连接(创建)数据库：  </p>
+<ul>
+<li>```JavaScript<br>// 1.mongodb: 是芒果数据库的协议规则<br>// 2.connect返回的是promise对象<br>// 3.playgroud是数据库名称，没有则会新建，和创建文件一样<br>const mongoose = require(‘mongoose’)<br>mongoose.connect(‘mongodb://localhost/playgroud’)<pre><code>.then(()=&gt;console.log(&#39;数据库连接成功&#39;))
+.catch(err=&gt;console.log(&#39;数据库连接失败&#39;,err))
+</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">## 二，增删改查</span><br><span class="line"></span><br><span class="line">&gt; 关于数据库的操作都是异步操作   异步api有回调函数和promise两种方式</span><br><span class="line">&gt;</span><br><span class="line">&gt; 前端里异步都可以用promise    这些方法都返回promise对象</span><br><span class="line"></span><br><span class="line">### 1. 创建集合</span><br><span class="line"></span><br><span class="line">- 第一步：对集合设定规则（设置属性字段）</span><br><span class="line"></span><br><span class="line">- 第二步：使用规则创建集合</span><br><span class="line"></span><br><span class="line">  ```JavaScript</span><br><span class="line">  // 传入的对象就是集合属性（表字段）</span><br><span class="line">  const couresSchema = new mongoose.Schema(&#123;</span><br><span class="line">      name: String,</span><br><span class="line">      author: String,</span><br><span class="line">      isPublished: Boolean</span><br><span class="line">  &#125;)</span><br><span class="line">  // 返回的是构造函数，通过构造函数里的各种方法操作集合的数据</span><br><span class="line">  const Course = mongoose.model(&#x27;Course&#x27;, couresSchema)</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+<h3 id="2-创建文档"><a href="#2-创建文档" class="headerlink" title="2. 创建文档"></a>2. 创建文档</h3><blockquote>
+<p>数据库没有数据就不会显示</p>
+<p>_id是唯一标识</p>
+</blockquote>
+<ul>
+<li><p>创建集合实例</p>
+</li>
+<li><p>调用实例对象下的save方法将数据保存到数据库中</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 方式一：方法调用生成</span></span><br><span class="line"><span class="comment">// 实例化上面的构造函数</span></span><br><span class="line"><span class="keyword">const</span> course = <span class="keyword">new</span> Course(&#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;node&#x27;</span>,</span><br><span class="line">    <span class="attr">author</span>: <span class="string">&#x27;why&#x27;</span>,</span><br><span class="line">    <span class="attr">isPublished</span>: <span class="literal">true</span></span><br><span class="line">&#125;)</span><br><span class="line">course.save()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 方式二：通过构造函数方法初始化</span></span><br><span class="line"><span class="comment">// 回调函数方式</span></span><br><span class="line">Course.create(&#123;<span class="attr">name</span>: <span class="string">&#x27;前端&#x27;</span>,<span class="attr">author</span>: <span class="string">&#x27;pink&#x27;</span>,<span class="attr">isPublished</span>: <span class="literal">false</span>&#125;, <span class="function">(<span class="params">err, res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(err);</span><br><span class="line">    <span class="built_in">console</span>.log(res);</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// promise方式</span></span><br><span class="line">Course.create(&#123; <span class="attr">name</span>: <span class="string">&#x27;前端&#x27;</span>, <span class="attr">author</span>: <span class="string">&#x27;pink&#x27;</span>, <span class="attr">isPublished</span>: <span class="literal">false</span> &#125;)</span><br><span class="line">    .then(<span class="function"><span class="params">doc</span>=&gt;</span><span class="built_in">console</span>.log(doc))</span><br><span class="line">    .catch(<span class="function"><span class="params">err</span>=&gt;</span><span class="built_in">console</span>.log(err))</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="3-数据库导入数据"><a href="#3-数据库导入数据" class="headerlink" title="3. 数据库导入数据"></a>3. 数据库导入数据</h3><blockquote>
+<p>mongoimport -d 数据库名称 -c 集合名称 -file 要导入的数据文件</p>
+<p>导入需要配置环境变量</p>
+</blockquote>
+<h3 id="4-查询文档"><a href="#4-查询文档" class="headerlink" title="4. 查询文档"></a>4. 查询文档</h3><blockquote>
+<p>find() 返回的是数组    findOne() 返回的是单个数据</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> userSchema = <span class="keyword">new</span> mongoose.Schema(&#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="built_in">String</span>,</span><br><span class="line">    <span class="attr">age</span>: <span class="built_in">Number</span>,</span><br><span class="line">    <span class="attr">hobbies</span>: [<span class="built_in">String</span>]</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">const</span> User = mongoose.model(<span class="string">&#x27;User&#x27;</span>, userSchema)</span><br><span class="line"><span class="comment">// 查询所有</span></span><br><span class="line">User.find().then(<span class="function"><span class="params">res</span> =&gt;</span> <span class="built_in">console</span>.log(res))</span><br><span class="line"><span class="comment">// 查询age为20</span></span><br><span class="line">User.find(&#123; <span class="attr">age</span>: <span class="number">20</span> &#125;).then(<span class="function"><span class="params">res</span> =&gt;</span> <span class="built_in">console</span>.log(res))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>$gt 大于   $lt 小于   $in 包含    条件查询也是通过对象参数的方式</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 查询年龄大于19小于23的用户数据</span></span><br><span class="line">User.find(&#123; <span class="attr">age</span>: &#123; <span class="attr">$gt</span>: <span class="number">19</span>, <span class="attr">$lt</span>: <span class="number">23</span> &#125; &#125;).then(<span class="function"><span class="params">res</span> =&gt;</span> <span class="built_in">console</span>.log(res))</span><br><span class="line"><span class="comment">// 查询爱好包含唱歌的用户数据</span></span><br><span class="line">User.find(&#123; <span class="attr">hobbies</span>: &#123; <span class="attr">$in</span>: [<span class="string">&#x27;唱歌&#x27;</span>] &#125; &#125;).then(<span class="function"><span class="params">res</span> =&gt;</span> <span class="built_in">console</span>.log(res))</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>查询多个字段</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 查询所有用户的姓名和年龄   默认带有id</span></span><br><span class="line">User.find().select(<span class="string">&#x27;age name&#x27;</span>).then(<span class="function"><span class="params">res</span> =&gt;</span> <span class="built_in">console</span>.log(res))</span><br><span class="line"><span class="comment">// -字段  不查询此字段</span></span><br><span class="line">User.find().select(<span class="string">&#x27;age name -_id&#x27;</span>).then(<span class="function"><span class="params">res</span> =&gt;</span> <span class="built_in">console</span>.log(res))</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>排序</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 将查询出的年龄按时间排序   （默认升序）</span></span><br><span class="line">User.find().sort(<span class="string">&#x27;age&#x27;</span>).then(<span class="function"><span class="params">res</span> =&gt;</span> <span class="built_in">console</span>.log(res))</span><br><span class="line"><span class="comment">// 加 - 是降序</span></span><br><span class="line">User.find().sort(<span class="string">&#x27;-	age&#x27;</span>).then(<span class="function"><span class="params">res</span> =&gt;</span> <span class="built_in">console</span>.log(res))</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>skip跳过多少条数据，limit限制查询数量   （常用于分页）</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 跳过了前两条数据，只查询一条</span></span><br><span class="line">User.find().skip(<span class="number">2</span>).limit(<span class="number">1</span>).then(<span class="function"><span class="params">res</span> =&gt;</span> <span class="built_in">console</span>.log(res))</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-删除文档"><a href="#5-删除文档" class="headerlink" title="5. 删除文档"></a>5. 删除文档</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 1. 删除单个</span></span><br><span class="line"><span class="comment">// 删除哪个就返回值就哪个   （匹配到多个，只会删除第一个）</span></span><br><span class="line">User.findOneAndDelete(&#123; <span class="attr">name</span>: <span class="string">&#x27;devil&#x27;</span> &#125;).then(<span class="function"><span class="params">res</span> =&gt;</span> <span class="built_in">console</span>.log(res))</span><br><span class="line"><span class="comment">// 2. 删除多个</span></span><br><span class="line"><span class="comment">// 不传值默认删除全部</span></span><br><span class="line">User.deleteMany(&#123;&#125;).then(<span class="function"><span class="params">res</span> =&gt;</span> <span class="built_in">console</span>.log(res))</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-更新文档"><a href="#6-更新文档" class="headerlink" title="6. 更新文档"></a>6. 更新文档</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 更新单个  &#123;查询条件&#125; , &#123;要修改的值&#125;  （匹配到多个，只会更新第一个）</span></span><br><span class="line">User.updateOne(&#123; <span class="attr">name</span>: <span class="string">&#x27;lj&#x27;</span> &#125;, &#123; <span class="attr">age</span>: <span class="number">18</span> &#125;).then(<span class="function"><span class="params">res</span> =&gt;</span> <span class="built_in">console</span>.log(res))</span><br><span class="line"><span class="comment">// 更新多个文档  &#123;&#125; 不传参数就是全选</span></span><br><span class="line">User.updateMany(&#123;&#125;, &#123; <span class="attr">age</span>: <span class="number">18</span> &#125;).then(<span class="function"><span class="params">res</span> =&gt;</span> <span class="built_in">console</span>.log(res))</span><br></pre></td></tr></table></figure>
+
+]]></content>
       <tags>
         <tag>node</tag>
       </tags>
