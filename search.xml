@@ -1,6 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Buffer</title>
+    <url>/2021/09/22/Buffer/</url>
+    <content><![CDATA[<h2 id="一，认识Buffer"><a href="#一，认识Buffer" class="headerlink" title="一，认识Buffer"></a>一，认识Buffer</h2><h3 id="1-buffer原理"><a href="#1-buffer原理" class="headerlink" title="1. buffer原理"></a>1. buffer原理</h3><ul>
+<li>我们可以将Buffer看成是一个存储二进制的数组</li>
+<li>这个数组中的每一项，可以保存8位二进制： 00000000</li>
+<li>理解：字节数组</li>
+</ul>
+<h3 id="2-buffer和字符串"><a href="#2-buffer和字符串" class="headerlink" title="2. buffer和字符串"></a>2. buffer和字符串</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> msg = <span class="string">&quot;love you&quot;</span></span><br><span class="line"><span class="keyword">const</span> buffer = <span class="keyword">new</span> Buffer.from(msg)</span><br><span class="line"><span class="built_in">console</span>.log(buffer);</span><br><span class="line"><span class="built_in">console</span>.log(buffer.toString());</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/09/23/LFwxIHGvnDeOqdo.png" alt="image-20210923183711425"></p>
+<h3 id="3-其他创建方式"><a href="#3-其他创建方式" class="headerlink" title="3. 其他创建方式"></a>3. 其他创建方式</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> buffer = <span class="keyword">new</span> Buffer.alloc(<span class="number">8</span>)</span><br><span class="line"><span class="built_in">console</span>.log(buffer);</span><br><span class="line">buffer[<span class="number">0</span>] = <span class="number">12</span></span><br><span class="line">buffer[<span class="number">1</span>] = <span class="number">0x12</span></span><br><span class="line"><span class="built_in">console</span>.log(buffer);</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/09/23/9kwRZ5qHgEzWuCP.png" alt="image-20210923190319950"></p>
+<h3 id="4-buffer和文件读取"><a href="#4-buffer和文件读取" class="headerlink" title="4. buffer和文件读取"></a>4. buffer和文件读取</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> sharp = <span class="built_in">require</span>(<span class="string">&#x27;sharp&#x27;</span>)</span><br><span class="line"><span class="comment">// 1. 读取文本文件</span></span><br><span class="line">fs.readFile(<span class="string">&#x27;./a.txt&#x27;</span>, <span class="function">(<span class="params">err, data</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(data);</span><br><span class="line">    <span class="built_in">console</span>.log(data.toString());</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 读取图片文件</span></span><br><span class="line">fs.readFile(<span class="string">&#x27;./芽衣.jpg&#x27;</span>, <span class="function">(<span class="params">err, data</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(data);</span><br><span class="line">    fs.writeFile(<span class="string">&#x27;./copyYaYi.jpg&#x27;</span>, data, <span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// 复制了</span></span><br><span class="line">        <span class="built_in">console</span>.log(err);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. sharp库的使用</span></span><br><span class="line">sharp(<span class="string">&#x27;./芽衣.jpg&#x27;</span>) <span class="comment">// 把图片转成buffer进行处理</span></span><br><span class="line">    .resize(<span class="number">400</span>, <span class="number">300</span>)</span><br><span class="line">    .rotate(<span class="number">90</span>)</span><br><span class="line">    .toFile(<span class="string">&#x27;./createPic.jpg&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="二，Buffer的创建过程"><a href="#二，Buffer的创建过程" class="headerlink" title="二，Buffer的创建过程"></a>二，Buffer的创建过程</h2><blockquote>
+<p>源码，后期学习。。。</p>
+</blockquote>
+]]></content>
+      <tags>
+        <tag>node</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ES Module</title>
+    <url>/2021/09/16/ES-Module/</url>
+    <content><![CDATA[<h4 id="一，区别于commonJS"><a href="#一，区别于commonJS" class="headerlink" title="一，区别于commonJS"></a>一，区别于commonJS</h4><ul>
+<li>import和export是关键字</li>
+<li>采用编译器的静态分析，并且也加入了动态引用的方式（在代码解析阶段执行，所以不能写到逻辑代码中。逻辑代码是个执行过程）</li>
+</ul>
+<h4 id="二，语法"><a href="#二，语法" class="headerlink" title="二，语法"></a>二，语法</h4><p><strong>–导出–</strong></p>
+<p>​        导出的是变量的引用，就是地址，所以改动了值，导出的内容也会改变。</p>
+<p><img src="https://i.loli.net/2021/09/16/rkzM3xEtCj1KaY9.png" alt="image-20210916192559447"></p>
+<h6 id="方式一："><a href="#方式一：" class="headerlink" title="方式一："></a>方式一：</h6><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> name=<span class="string">&quot;why&quot;</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> sayHello=<span class="function"><span class="keyword">function</span>(<span class="params">name</span>)</span>&#123;</span><br><span class="line">    <span class="comment">// 方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="方式二：-中统一导出"><a href="#方式二：-中统一导出" class="headerlink" title="方式二：{} 中统一导出"></a>方式二：{} 中统一导出</h6><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// &#123;放置要导出的变量的引用列表&#125;</span></span><br><span class="line"><span class="keyword">export</span> &#123;</span><br><span class="line">	name,</span><br><span class="line">    sayHello</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="方式三：-导出时，可以给变量起别名"><a href="#方式三：-导出时，可以给变量起别名" class="headerlink" title="方式三：{} 导出时，可以给变量起别名"></a>方式三：{} 导出时，可以给变量起别名</h6><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> &#123;</span><br><span class="line">	name <span class="keyword">as</span> FName,</span><br><span class="line">    sayHello <span class="keyword">as</span> FSayHello</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>–导入–</strong></p>
+<h6 id="方式一：-1"><a href="#方式一：-1" class="headerlink" title="方式一："></a>方式一：</h6><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 这里的&#123;&#125;不是对象</span></span><br><span class="line"><span class="keyword">import</span> &#123;name,sayHello&#125; <span class="keyword">from</span> <span class="string">&#x27;./xx/xx.js&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h6 id="方式二：-导出变量之后可以起别名"><a href="#方式二：-导出变量之后可以起别名" class="headerlink" title="方式二：{} 导出变量之后可以起别名"></a>方式二：{} 导出变量之后可以起别名</h6><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 这里的&#123;&#125;不是对象</span></span><br><span class="line"><span class="keyword">import</span> &#123;name <span class="keyword">as</span> oName,sayHello <span class="keyword">as</span> oSayHello&#125; <span class="keyword">from</span> <span class="string">&#x27;./xx/xx.js&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h6 id="方式三：-as-foo"><a href="#方式三：-as-foo" class="headerlink" title="方式三：*  as foo"></a>方式三：*  as foo</h6><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 放入一个对象中</span></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> foo <span class="keyword">from</span> <span class="string">&#x27;./xx/xx.js&#x27;</span></span><br><span class="line">foo.name</span><br></pre></td></tr></table></figure>
+
+<p> <strong>–default–</strong></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    方法（）</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">import</span> 自定义名字 <span class="keyword">from</span> <span class="string">&quot;./x&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>注意：一个模块只有一个default</p>
+<h4 id="三，ConmonJS和ES-Module交互"><a href="#三，ConmonJS和ES-Module交互" class="headerlink" title="三，ConmonJS和ES Module交互"></a>三，ConmonJS和ES Module交互</h4><ul>
+<li>通常情况下，cjs不能加载ES Module</li>
+<li>多数情况下，ES Module可以加载cjs</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>node</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>MongoDB和Node</title>
     <url>/2021/09/29/MongoDB%E5%92%8CNode/</url>
     <content><![CDATA[<h1 id="MongoDB和Node（一）"><a href="#MongoDB和Node（一）" class="headerlink" title="MongoDB和Node（一）"></a>MongoDB和Node（一）</h1><h2 id="一，-连接"><a href="#一，-连接" class="headerlink" title="一， 连接"></a>一， 连接</h2><ol>
@@ -66,63 +126,18 @@
       </tags>
   </entry>
   <entry>
-    <title>ES Module</title>
-    <url>/2021/09/16/ES-Module/</url>
-    <content><![CDATA[<h4 id="一，区别于commonJS"><a href="#一，区别于commonJS" class="headerlink" title="一，区别于commonJS"></a>一，区别于commonJS</h4><ul>
-<li>import和export是关键字</li>
-<li>采用编译器的静态分析，并且也加入了动态引用的方式（在代码解析阶段执行，所以不能写到逻辑代码中。逻辑代码是个执行过程）</li>
-</ul>
-<h4 id="二，语法"><a href="#二，语法" class="headerlink" title="二，语法"></a>二，语法</h4><p><strong>–导出–</strong></p>
-<p>​        导出的是变量的引用，就是地址，所以改动了值，导出的内容也会改变。</p>
-<p><img src="https://i.loli.net/2021/09/16/rkzM3xEtCj1KaY9.png" alt="image-20210916192559447"></p>
-<h6 id="方式一："><a href="#方式一：" class="headerlink" title="方式一："></a>方式一：</h6><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> name=<span class="string">&quot;why&quot;</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> sayHello=<span class="function"><span class="keyword">function</span>(<span class="params">name</span>)</span>&#123;</span><br><span class="line">    <span class="comment">// 方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h6 id="方式二：-中统一导出"><a href="#方式二：-中统一导出" class="headerlink" title="方式二：{} 中统一导出"></a>方式二：{} 中统一导出</h6><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// &#123;放置要导出的变量的引用列表&#125;</span></span><br><span class="line"><span class="keyword">export</span> &#123;</span><br><span class="line">	name,</span><br><span class="line">    sayHello</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h6 id="方式三：-导出时，可以给变量起别名"><a href="#方式三：-导出时，可以给变量起别名" class="headerlink" title="方式三：{} 导出时，可以给变量起别名"></a>方式三：{} 导出时，可以给变量起别名</h6><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> &#123;</span><br><span class="line">	name <span class="keyword">as</span> FName,</span><br><span class="line">    sayHello <span class="keyword">as</span> FSayHello</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>–导入–</strong></p>
-<h6 id="方式一：-1"><a href="#方式一：-1" class="headerlink" title="方式一："></a>方式一：</h6><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 这里的&#123;&#125;不是对象</span></span><br><span class="line"><span class="keyword">import</span> &#123;name,sayHello&#125; <span class="keyword">from</span> <span class="string">&#x27;./xx/xx.js&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<h6 id="方式二：-导出变量之后可以起别名"><a href="#方式二：-导出变量之后可以起别名" class="headerlink" title="方式二：{} 导出变量之后可以起别名"></a>方式二：{} 导出变量之后可以起别名</h6><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 这里的&#123;&#125;不是对象</span></span><br><span class="line"><span class="keyword">import</span> &#123;name <span class="keyword">as</span> oName,sayHello <span class="keyword">as</span> oSayHello&#125; <span class="keyword">from</span> <span class="string">&#x27;./xx/xx.js&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<h6 id="方式三：-as-foo"><a href="#方式三：-as-foo" class="headerlink" title="方式三：*  as foo"></a>方式三：*  as foo</h6><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 放入一个对象中</span></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> foo <span class="keyword">from</span> <span class="string">&#x27;./xx/xx.js&#x27;</span></span><br><span class="line">foo.name</span><br></pre></td></tr></table></figure>
-
-<p> <strong>–default–</strong></p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    方法（）</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">import</span> 自定义名字 <span class="keyword">from</span> <span class="string">&quot;./x&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>注意：一个模块只有一个default</p>
-<h4 id="三，ConmonJS和ES-Module交互"><a href="#三，ConmonJS和ES-Module交互" class="headerlink" title="三，ConmonJS和ES Module交互"></a>三，ConmonJS和ES Module交互</h4><ul>
-<li>通常情况下，cjs不能加载ES Module</li>
-<li>多数情况下，ES Module可以加载cjs</li>
-</ul>
-]]></content>
-      <tags>
-        <tag>node</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Buffer</title>
-    <url>/2021/09/22/Buffer/</url>
-    <content><![CDATA[<h2 id="一，认识Buffer"><a href="#一，认识Buffer" class="headerlink" title="一，认识Buffer"></a>一，认识Buffer</h2><h3 id="1-buffer原理"><a href="#1-buffer原理" class="headerlink" title="1. buffer原理"></a>1. buffer原理</h3><ul>
-<li>我们可以将Buffer看成是一个存储二进制的数组</li>
-<li>这个数组中的每一项，可以保存8位二进制： 00000000</li>
-<li>理解：字节数组</li>
-</ul>
-<h3 id="2-buffer和字符串"><a href="#2-buffer和字符串" class="headerlink" title="2. buffer和字符串"></a>2. buffer和字符串</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> msg = <span class="string">&quot;love you&quot;</span></span><br><span class="line"><span class="keyword">const</span> buffer = <span class="keyword">new</span> Buffer.from(msg)</span><br><span class="line"><span class="built_in">console</span>.log(buffer);</span><br><span class="line"><span class="built_in">console</span>.log(buffer.toString());</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://i.loli.net/2021/09/23/LFwxIHGvnDeOqdo.png" alt="image-20210923183711425"></p>
-<h3 id="3-其他创建方式"><a href="#3-其他创建方式" class="headerlink" title="3. 其他创建方式"></a>3. 其他创建方式</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> buffer = <span class="keyword">new</span> Buffer.alloc(<span class="number">8</span>)</span><br><span class="line"><span class="built_in">console</span>.log(buffer);</span><br><span class="line">buffer[<span class="number">0</span>] = <span class="number">12</span></span><br><span class="line">buffer[<span class="number">1</span>] = <span class="number">0x12</span></span><br><span class="line"><span class="built_in">console</span>.log(buffer);</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://i.loli.net/2021/09/23/9kwRZ5qHgEzWuCP.png" alt="image-20210923190319950"></p>
-<h3 id="4-buffer和文件读取"><a href="#4-buffer和文件读取" class="headerlink" title="4. buffer和文件读取"></a>4. buffer和文件读取</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> sharp = <span class="built_in">require</span>(<span class="string">&#x27;sharp&#x27;</span>)</span><br><span class="line"><span class="comment">// 1. 读取文本文件</span></span><br><span class="line">fs.readFile(<span class="string">&#x27;./a.txt&#x27;</span>, <span class="function">(<span class="params">err, data</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(data);</span><br><span class="line">    <span class="built_in">console</span>.log(data.toString());</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 读取图片文件</span></span><br><span class="line">fs.readFile(<span class="string">&#x27;./芽衣.jpg&#x27;</span>, <span class="function">(<span class="params">err, data</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(data);</span><br><span class="line">    fs.writeFile(<span class="string">&#x27;./copyYaYi.jpg&#x27;</span>, data, <span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// 复制了</span></span><br><span class="line">        <span class="built_in">console</span>.log(err);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. sharp库的使用</span></span><br><span class="line">sharp(<span class="string">&#x27;./芽衣.jpg&#x27;</span>) <span class="comment">// 把图片转成buffer进行处理</span></span><br><span class="line">    .resize(<span class="number">400</span>, <span class="number">300</span>)</span><br><span class="line">    .rotate(<span class="number">90</span>)</span><br><span class="line">    .toFile(<span class="string">&#x27;./createPic.jpg&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-<h2 id="二，Buffer的创建过程"><a href="#二，Buffer的创建过程" class="headerlink" title="二，Buffer的创建过程"></a>二，Buffer的创建过程</h2><blockquote>
-<p>源码，后期学习。。。</p>
+    <title>MongoDB和Node（三）</title>
+    <url>/2021/09/30/MongoDB%E5%92%8CNode%EF%BC%88%E4%B8%89%EF%BC%89/</url>
+    <content><![CDATA[<h1 id="MongoDB和Node（三）"><a href="#MongoDB和Node（三）" class="headerlink" title="MongoDB和Node（三）"></a>MongoDB和Node（三）</h1><blockquote>
+<p>联系：多表查询</p>
+<p>一，使用id对集合进行关联</p>
+<p>使用populate方法进行关联集合查询</p>
 </blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 用户集合</span></span><br><span class="line"><span class="keyword">const</span> Userlj = mongoose.model(<span class="string">&#x27;Userlj&#x27;</span>, <span class="keyword">new</span> mongoose.Schema(&#123;</span><br><span class="line">    <span class="attr">name</span>: &#123;</span><br><span class="line">        <span class="attr">type</span>: <span class="built_in">String</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;))</span><br><span class="line"><span class="comment">// 文章集合</span></span><br><span class="line"><span class="keyword">const</span> Postlj = mongoose.model(<span class="string">&#x27;Postlj&#x27;</span>, <span class="keyword">new</span> mongoose.Schema(&#123;</span><br><span class="line">    <span class="attr">title</span>: &#123; <span class="attr">type</span>: <span class="built_in">String</span> &#125;,</span><br><span class="line">    <span class="comment">// 使用ID将文章集合和作者集合进行关联</span></span><br><span class="line">    <span class="attr">author</span>: &#123; <span class="attr">type</span>: mongoose.Schema.Types.ObjectId, <span class="attr">ref</span>: <span class="string">&#x27;Userlj&#x27;</span> &#125;</span><br><span class="line">&#125;))</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建用户</span></span><br><span class="line">Userlj.create(&#123; <span class="attr">name</span>: <span class="string">&#x27;dyy&#x27;</span> &#125;).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123; <span class="built_in">console</span>.log(res) &#125;)</span><br><span class="line"><span class="comment">// 创建文章</span></span><br><span class="line">Postlj.create(&#123; <span class="attr">title</span>: <span class="string">&#x27;love&#x27;</span>, <span class="attr">author</span>: <span class="string">&#x27;61552d2f1248537d84a065b1&#x27;</span> &#125;).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123; <span class="built_in">console</span>.log(res) &#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 联合查询</span></span><br><span class="line">Postlj.find().populate(<span class="string">&#x27;author&#x27;</span>).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123; <span class="built_in">console</span>.log(res) &#125;)</span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <tags>
-        <tag>node</tag>
+        <tag>mongodb</tag>
       </tags>
   </entry>
   <entry>
@@ -200,21 +215,6 @@
 ]]></content>
       <tags>
         <tag>node</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>MongoDB和Node（三）</title>
-    <url>/2021/09/30/MongoDB%E5%92%8CNode%EF%BC%88%E4%B8%89%EF%BC%89/</url>
-    <content><![CDATA[<h1 id="MongoDB和Node（三）"><a href="#MongoDB和Node（三）" class="headerlink" title="MongoDB和Node（三）"></a>MongoDB和Node（三）</h1><blockquote>
-<p>联系：多表查询</p>
-<p>一，使用id对集合进行关联</p>
-<p>使用populate方法进行关联集合查询</p>
-</blockquote>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 用户集合</span></span><br><span class="line"><span class="keyword">const</span> Userlj = mongoose.model(<span class="string">&#x27;Userlj&#x27;</span>, <span class="keyword">new</span> mongoose.Schema(&#123;</span><br><span class="line">    <span class="attr">name</span>: &#123;</span><br><span class="line">        <span class="attr">type</span>: <span class="built_in">String</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;))</span><br><span class="line"><span class="comment">// 文章集合</span></span><br><span class="line"><span class="keyword">const</span> Postlj = mongoose.model(<span class="string">&#x27;Postlj&#x27;</span>, <span class="keyword">new</span> mongoose.Schema(&#123;</span><br><span class="line">    <span class="attr">title</span>: &#123; <span class="attr">type</span>: <span class="built_in">String</span> &#125;,</span><br><span class="line">    <span class="comment">// 使用ID将文章集合和作者集合进行关联</span></span><br><span class="line">    <span class="attr">author</span>: &#123; <span class="attr">type</span>: mongoose.Schema.Types.ObjectId, <span class="attr">ref</span>: <span class="string">&#x27;Userlj&#x27;</span> &#125;</span><br><span class="line">&#125;))</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建用户</span></span><br><span class="line">Userlj.create(&#123; <span class="attr">name</span>: <span class="string">&#x27;dyy&#x27;</span> &#125;).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123; <span class="built_in">console</span>.log(res) &#125;)</span><br><span class="line"><span class="comment">// 创建文章</span></span><br><span class="line">Postlj.create(&#123; <span class="attr">title</span>: <span class="string">&#x27;love&#x27;</span>, <span class="attr">author</span>: <span class="string">&#x27;61552d2f1248537d84a065b1&#x27;</span> &#125;).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123; <span class="built_in">console</span>.log(res) &#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 联合查询</span></span><br><span class="line">Postlj.find().populate(<span class="string">&#x27;author&#x27;</span>).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123; <span class="built_in">console</span>.log(res) &#125;)</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <tags>
-        <tag>mongodb</tag>
       </tags>
   </entry>
   <entry>
