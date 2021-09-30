@@ -463,7 +463,7 @@
   <entry>
     <title>MongoDB和Node</title>
     <url>/2021/09/29/MongoDB%E5%92%8CNode/</url>
-    <content><![CDATA[<h1 id="MongoDB和Node"><a href="#MongoDB和Node" class="headerlink" title="MongoDB和Node"></a>MongoDB和Node</h1><h2 id="一，-连接"><a href="#一，-连接" class="headerlink" title="一， 连接"></a>一， 连接</h2><ol>
+    <content><![CDATA[<h1 id="MongoDB和Node（一）"><a href="#MongoDB和Node（一）" class="headerlink" title="MongoDB和Node（一）"></a>MongoDB和Node（一）</h1><h2 id="一，-连接"><a href="#一，-连接" class="headerlink" title="一， 连接"></a>一， 连接</h2><ol>
 <li><p>需要依赖Node.js第三方包mongoose</p>
 </li>
 <li><p>启动服务（同msql，SqlServer等）： net start(stop) mongoDB</p>
@@ -522,7 +522,38 @@
 
 ]]></content>
       <tags>
-        <tag>node</tag>
+        <tag>mongodb</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MongoDB和Node（三）</title>
+    <url>/2021/09/30/MongoDB%E5%92%8CNode%EF%BC%88%E4%B8%89%EF%BC%89/</url>
+    <content><![CDATA[<h1 id="MongoDB和Node（三）"><a href="#MongoDB和Node（三）" class="headerlink" title="MongoDB和Node（三）"></a>MongoDB和Node（三）</h1><blockquote>
+<p>联系：多表查询</p>
+<p>一，使用id对集合进行关联</p>
+<p>使用populate方法进行关联集合查询</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 用户集合</span></span><br><span class="line"><span class="keyword">const</span> Userlj = mongoose.model(<span class="string">&#x27;Userlj&#x27;</span>, <span class="keyword">new</span> mongoose.Schema(&#123;</span><br><span class="line">    <span class="attr">name</span>: &#123;</span><br><span class="line">        <span class="attr">type</span>: <span class="built_in">String</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;))</span><br><span class="line"><span class="comment">// 文章集合</span></span><br><span class="line"><span class="keyword">const</span> Postlj = mongoose.model(<span class="string">&#x27;Postlj&#x27;</span>, <span class="keyword">new</span> mongoose.Schema(&#123;</span><br><span class="line">    <span class="attr">title</span>: &#123; <span class="attr">type</span>: <span class="built_in">String</span> &#125;,</span><br><span class="line">    <span class="comment">// 使用ID将文章集合和作者集合进行关联</span></span><br><span class="line">    <span class="attr">author</span>: &#123; <span class="attr">type</span>: mongoose.Schema.Types.ObjectId, <span class="attr">ref</span>: <span class="string">&#x27;Userlj&#x27;</span> &#125;</span><br><span class="line">&#125;))</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建用户</span></span><br><span class="line">Userlj.create(&#123; <span class="attr">name</span>: <span class="string">&#x27;dyy&#x27;</span> &#125;).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123; <span class="built_in">console</span>.log(res) &#125;)</span><br><span class="line"><span class="comment">// 创建文章</span></span><br><span class="line">Postlj.create(&#123; <span class="attr">title</span>: <span class="string">&#x27;love&#x27;</span>, <span class="attr">author</span>: <span class="string">&#x27;61552d2f1248537d84a065b1&#x27;</span> &#125;).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123; <span class="built_in">console</span>.log(res) &#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 联合查询</span></span><br><span class="line">Postlj.find().populate(<span class="string">&#x27;author&#x27;</span>).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123; <span class="built_in">console</span>.log(res) &#125;)</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <tags>
+        <tag>mongodb</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MongoDB和Node（二）</title>
+    <url>/2021/09/30/MongoDB%E5%92%8CNode%EF%BC%88%E4%BA%8C%EF%BC%89/</url>
+    <content><![CDATA[<h1 id="MongoDB和Node（二）"><a href="#MongoDB和Node（二）" class="headerlink" title="MongoDB和Node（二）"></a>MongoDB和Node（二）</h1><blockquote>
+<p>在创建集合规则时，可以设置当前字段的验证规则，验证失败则输入插入失败。</p>
+<p>理解：类似创建表的sql代码，设置规则</p>
+<p>联系：语法很类似vue的props参数</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 可以定义错误信息</span></span><br><span class="line"><span class="keyword">const</span> db = <span class="keyword">new</span> mongoose.Schema(&#123;</span><br><span class="line">    <span class="attr">title</span>: &#123;</span><br><span class="line">        <span class="attr">type</span>: <span class="built_in">String</span>,</span><br><span class="line">        <span class="attr">required</span>: [<span class="literal">true</span>, <span class="string">&#x27;请传入文章标题&#x27;</span>], <span class="comment">// 必选字段</span></span><br><span class="line">        <span class="attr">minlength</span>: [<span class="number">2</span>, <span class="string">&#x27;文章长度最小为2&#x27;</span>], <span class="comment">// 字段最小长度</span></span><br><span class="line">        <span class="attr">maxlength</span>: [<span class="number">5</span>, <span class="string">&#x27;文章长度最大为5&#x27;</span>], <span class="comment">//字段最大长度</span></span><br><span class="line">        <span class="attr">trim</span>: <span class="literal">true</span> <span class="comment">// 去除字段两端空格</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">age</span>: &#123;</span><br><span class="line">        <span class="attr">type</span>: <span class="built_in">Number</span>,</span><br><span class="line">        <span class="attr">min</span>: [<span class="number">18</span>, <span class="string">&#x27;年龄最小为18&#x27;</span>], <span class="comment">// 数值最小为18</span></span><br><span class="line">        <span class="attr">max</span>: [<span class="number">23</span>, <span class="string">&#x27;年龄最大为23&#x27;</span>] <span class="comment">// 数值最大为23</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">time</span>: &#123;</span><br><span class="line">        <span class="attr">type</span>: <span class="built_in">Date</span>,</span><br><span class="line">        <span class="attr">default</span>: <span class="built_in">Date</span>.now <span class="comment">// 默认值</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">category</span>: &#123;</span><br><span class="line">        <span class="attr">type</span>: <span class="built_in">String</span>,</span><br><span class="line">        <span class="comment">// 枚举，传入的值不是规定的值就验证失败</span></span><br><span class="line">        <span class="attr">enum</span>: &#123;</span><br><span class="line">            <span class="attr">values</span>: [<span class="string">&#x27;love&#x27;</span>, <span class="string">&#x27;like&#x27;</span>, <span class="string">&#x27;thank&#x27;</span>],</span><br><span class="line">            <span class="attr">message</span>: <span class="string">&#x27;&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">author</span>: &#123;</span><br><span class="line">        <span class="attr">type</span>: <span class="built_in">String</span>,</span><br><span class="line">        <span class="comment">// 自定义验证规则</span></span><br><span class="line">        <span class="attr">validate</span>: &#123;</span><br><span class="line">            <span class="comment">// 返回布尔值 true验证成功  false验证失败 v就是传入的值</span></span><br><span class="line">            <span class="attr">validator</span>: <span class="function"><span class="params">v</span> =&gt;</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> v &amp;&amp; v.length &gt; <span class="number">4</span></span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="comment">// 自定义错误信息</span></span><br><span class="line">            <span class="attr">message</span>: <span class="string">&#x27;传入的值不符合验证规则&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">const</span> post = mongoose.model(<span class="string">&#x27;Post&#x27;</span>, db)</span><br><span class="line">post.create(&#123; <span class="attr">title</span>: <span class="string">&#x27;dyy222&#x27;</span>, <span class="attr">age</span>: <span class="number">16</span>, <span class="attr">category</span>: <span class="string">&#x27;love22&#x27;</span>, <span class="attr">author</span>: <span class="string">&#x27;you&#x27;</span> &#125;)</span><br><span class="line">    .then(<span class="function"><span class="params">res</span> =&gt;</span> <span class="built_in">console</span>.log(res))</span><br><span class="line">    .catch(<span class="function"><span class="params">error</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// 将错误信息打印到控制台</span></span><br><span class="line">        <span class="keyword">const</span> err = error.errors;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> attr <span class="keyword">in</span> err) &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(err[attr][<span class="string">&#x27;message&#x27;</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/09/30/ZK5PeL26O4XDnUp.png" alt="image-20210930105833249"></p>
+]]></content>
+      <tags>
+        <tag>mongodb</tag>
       </tags>
   </entry>
 </search>

@@ -22,30 +22,30 @@
   <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="我们通过工具将代码发布到特定的位置；其他程序员直接通过工具来安装、升级、删除我们的工具代码">
+<meta name="description" content="mongoose验证规则，和props的语法非常像，也可以自定义规则。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="包管理工具">
-<meta property="og:url" content="http://example.com/2021/09/19/%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/index.html">
+<meta property="og:title" content="MongoDB和Node（二）">
+<meta property="og:url" content="http://example.com/2021/09/30/MongoDB%E5%92%8CNode%EF%BC%88%E4%BA%8C%EF%BC%89/index.html">
 <meta property="og:site_name" content="SleepWalkerWorld">
-<meta property="og:description" content="我们通过工具将代码发布到特定的位置；其他程序员直接通过工具来安装、升级、删除我们的工具代码">
+<meta property="og:description" content="mongoose验证规则，和props的语法非常像，也可以自定义规则。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://i.loli.net/2021/09/19/6MnPBjNXpkhaAZH.png">
-<meta property="article:published_time" content="2021-09-19T06:55:48.000Z">
-<meta property="article:modified_time" content="2021-09-19T09:04:20.020Z">
+<meta property="og:image" content="https://i.loli.net/2021/09/30/ZK5PeL26O4XDnUp.png">
+<meta property="article:published_time" content="2021-09-30T05:42:46.000Z">
+<meta property="article:modified_time" content="2021-09-30T05:50:35.288Z">
 <meta property="article:author" content="sleepwalker">
-<meta property="article:tag" content="node">
+<meta property="article:tag" content="mongodb">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://i.loli.net/2021/09/19/6MnPBjNXpkhaAZH.png">
+<meta name="twitter:image" content="https://i.loli.net/2021/09/30/ZK5PeL26O4XDnUp.png">
 
 
-<link rel="canonical" href="http://example.com/2021/09/19/%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/">
+<link rel="canonical" href="http://example.com/2021/09/30/MongoDB%E5%92%8CNode%EF%BC%88%E4%BA%8C%EF%BC%89/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2021/09/19/%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/","path":"2021/09/19/包管理工具/","title":"包管理工具"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2021/09/30/MongoDB%E5%92%8CNode%EF%BC%88%E4%BA%8C%EF%BC%89/","path":"2021/09/30/MongoDB和Node（二）/","title":"MongoDB和Node（二）"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>包管理工具 | SleepWalkerWorld</title>
+<title>MongoDB和Node（二） | SleepWalkerWorld</title>
   
 
 
@@ -155,7 +155,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%EF%BC%8C%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text">一，项目配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%EF%BC%8C%E5%B8%B8%E8%A7%81%E7%9A%84%E5%B1%9E%E6%80%A7"><span class="nav-number">2.</span> <span class="nav-text">二，常见的属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%EF%BC%8Cnpm-install-%E5%91%BD%E4%BB%A4"><span class="nav-number">3.</span> <span class="nav-text">三，npm install 命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%EF%BC%8Cpackage-lock-json"><span class="nav-number">4.</span> <span class="nav-text">四，package-lock.json</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MongoDB%E5%92%8CNode%EF%BC%88%E4%BA%8C%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">MongoDB和Node（二）</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -226,7 +226,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/19/%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/30/MongoDB%E5%92%8CNode%EF%BC%88%E4%BA%8C%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -239,7 +239,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          包管理工具
+          MongoDB和Node（二）
         </h1>
 
         <div class="post-meta-container">
@@ -251,7 +251,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2021-09-19 14:55:48 / 修改时间：17:04:20" itemprop="dateCreated datePublished" datetime="2021-09-19T14:55:48+08:00">2021-09-19</time>
+      <time title="创建时间：2021-09-30 13:42:46 / 修改时间：13:50:35" itemprop="dateCreated datePublished" datetime="2021-09-30T13:42:46+08:00">2021-09-30</time>
     </span>
 
   
@@ -264,7 +264,7 @@
     </span>
 </div>
 
-            <div class="post-description">我们通过工具将代码发布到特定的位置；其他程序员直接通过工具来安装、升级、删除我们的工具代码</div>
+            <div class="post-description">mongoose验证规则，和props的语法非常像，也可以自定义规则。</div>
         </div>
       </header>
 
@@ -272,116 +272,14 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="一，项目配置文件"><a href="#一，项目配置文件" class="headerlink" title="一，项目配置文件"></a>一，项目配置文件</h2><ul>
-<li>事实上，我们每一个项目都会有一个对应的配置文件，无论是前端项目还是后端项目<ul>
-<li>这个配置文件会记录着你项目的名称、版本号、项目描述等</li>
-<li>也会记录着你项目所依赖的其他库的信息和依赖库的版本号</li>
-</ul>
-</li>
-<li>这个配置文件在Node环境下面（无论是前端还是后端）就是package.json（npm init）</li>
-</ul>
-<h2 id="二，常见的属性"><a href="#二，常见的属性" class="headerlink" title="二，常见的属性"></a>二，常见的属性</h2><ul>
-<li>必须填写的属性：name、version<ul>
-<li>name是项目的名称</li>
-<li>version是当前项目的版本号</li>
-<li>description是描述信息，很多时候是作为项目的基本描述</li>
-<li>author是作者相关信息（发布时用到）</li>
-<li>license是开源协议（发布时用到）</li>
-</ul>
-</li>
-<li>private属性<ul>
-<li>private属性记录当前的项目是否是私有的</li>
-<li>当值为true时，npm是不能发布它的，这是防止私有项目或模块发布出去的方式</li>
-</ul>
-</li>
-<li>main属性<ul>
-<li>设置程序的入口</li>
-</ul>
-</li>
-<li>scripts属性<ul>
-<li>scripts属性用于配置一些脚本命令，以键值对的形式存在</li>
-<li>配置后我们可以通过 npm run 命令的key来执行这个命令</li>
-<li>npm start和npm run start的区别是什么？<ol>
-<li>它们是等价的</li>
-<li>对于常用的 start、 test、stop、restart可以省略掉run直接通过 npm start等方式运行</li>
-</ol>
-</li>
-</ul>
-</li>
-<li>dependencies属性<ul>
-<li>dependencies属性是指定无论开发环境还是生成环境都需要依赖的包</li>
-<li>通常是我们项目实际开发用到的一些库模块</li>
-<li>与之对应的是devDependencies</li>
-</ul>
-</li>
-<li>devDependencies属性<ul>
-<li>一些包在生成环境是不需要的，比如webpack、babel等</li>
-<li><strong>这个时候我们会通过 npm install webpack –save-dev，将它安装到devDependencies属性中</strong></li>
-<li>npm的包通常需要遵从semver版本规范<ul>
-<li>X主版本号（major）：当你做了不兼容的 API 修改（可能不兼容之前的版本）</li>
-<li>Y次版本号（minor）：当你做了向下兼容的功能性新增（新功能增加，但是兼容之前的版本）</li>
-<li>Z修订号（patch）：当你做了向下兼容的问题修正（没有新功能，修复了之前版本的bug）</li>
-</ul>
-</li>
-<li>^x.y.z：表示x是保持不变的，y和z永远安装最新的版本</li>
-<li>~x.y.z：表示x和y保持不变的，z永远安装最新的版本</li>
-</ul>
-</li>
-<li>engines属性 <ul>
-<li>engines属性用于指定Node和NPM的版本号</li>
-<li>在安装的过程中，会先检查对应的引擎版本，如果不符合就会报错</li>
-<li>事实上也可以指定所在的操作系统 “os” : [ “darwin”, “linux” ]，只是很少用到</li>
-</ul>
-</li>
-<li>browserslist属性<ul>
-<li>用于配置打包后的JavaScript浏览器的兼容情况，参考</li>
-<li>否则我们需要手动的添加polyfills来让支持某些语法</li>
-<li>也就是说它是为webpack等打包工具服务的一个属性（这里不是详细讲解webpack等工具的工作原理，所以 不再给出详情）</li>
-</ul>
-</li>
-</ul>
-<h2 id="三，npm-install-命令"><a href="#三，npm-install-命令" class="headerlink" title="三，npm install 命令"></a>三，npm install 命令</h2><p><img src="https://i.loli.net/2021/09/19/6MnPBjNXpkhaAZH.png" alt="image-20210919163733316"></p>
-<ul>
-<li>npm install会检测是有package-lock.json文件<ul>
-<li>没有lock文件<ol>
-<li>分析依赖关系，这是因为我们可能包会依赖其他的包，并且多个包之间会产生相同依赖的情况； </li>
-<li>从registry仓库中下载压缩包（如果我们设置了镜像，那么会从镜像服务器下载压缩包）； </li>
-<li>获取到压缩包后会对压缩包进行缓存（从npm5开始有的）； </li>
-<li>将压缩包解压到项目的node_modules文件夹中（前面我们讲过，require的查找顺序会在该包下面查找）</li>
-</ol>
-</li>
-<li>有lock文件<ol>
-<li>检测lock中包的版本是否和package.json中一致（会按照semver版本规范检测）<ul>
-<li>不一致，那么会重新构建依赖关系，直接会走顶层的流程</li>
-</ul>
-</li>
-<li>一致的情况下，会去优先查找缓存<ul>
-<li>没有找到，会从registry仓库下载，直接走顶层流程</li>
-</ul>
-</li>
-<li>查找到，会获取缓存中的压缩文件，并且将压缩文件解压到node_modules文件夹中</li>
-</ol>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="四，package-lock-json"><a href="#四，package-lock-json" class="headerlink" title="四，package-lock.json"></a>四，package-lock.json</h2><ul>
-<li>name：项目的名称</li>
-<li>version：项目的版本</li>
-<li>lockfileVersion：lock文件的版本</li>
-<li>requires：使用requires来跟着模块的依赖关系</li>
-<li>dependencies：项目的依赖<ul>
-<li>当前项目依赖axios，但是axios依赖follow-redireacts；</li>
-<li>axios中的属性如下<ol>
-<li>version表示实际安装的axios的版本</li>
-<li>resolved用来记录下载的地址，registry仓库中的位置</li>
-<li>requires记录当前模块的依赖</li>
-<li>integrity用来从缓存中获取索引，再通过索引去获取压缩包文件</li>
-</ol>
-</li>
-</ul>
-</li>
-</ul>
+        <h1 id="MongoDB和Node（二）"><a href="#MongoDB和Node（二）" class="headerlink" title="MongoDB和Node（二）"></a>MongoDB和Node（二）</h1><blockquote>
+<p>在创建集合规则时，可以设置当前字段的验证规则，验证失败则输入插入失败。</p>
+<p>理解：类似创建表的sql代码，设置规则</p>
+<p>联系：语法很类似vue的props参数</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 可以定义错误信息</span></span><br><span class="line"><span class="keyword">const</span> db = <span class="keyword">new</span> mongoose.Schema(&#123;</span><br><span class="line">    <span class="attr">title</span>: &#123;</span><br><span class="line">        <span class="attr">type</span>: <span class="built_in">String</span>,</span><br><span class="line">        <span class="attr">required</span>: [<span class="literal">true</span>, <span class="string">&#x27;请传入文章标题&#x27;</span>], <span class="comment">// 必选字段</span></span><br><span class="line">        <span class="attr">minlength</span>: [<span class="number">2</span>, <span class="string">&#x27;文章长度最小为2&#x27;</span>], <span class="comment">// 字段最小长度</span></span><br><span class="line">        <span class="attr">maxlength</span>: [<span class="number">5</span>, <span class="string">&#x27;文章长度最大为5&#x27;</span>], <span class="comment">//字段最大长度</span></span><br><span class="line">        <span class="attr">trim</span>: <span class="literal">true</span> <span class="comment">// 去除字段两端空格</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">age</span>: &#123;</span><br><span class="line">        <span class="attr">type</span>: <span class="built_in">Number</span>,</span><br><span class="line">        <span class="attr">min</span>: [<span class="number">18</span>, <span class="string">&#x27;年龄最小为18&#x27;</span>], <span class="comment">// 数值最小为18</span></span><br><span class="line">        <span class="attr">max</span>: [<span class="number">23</span>, <span class="string">&#x27;年龄最大为23&#x27;</span>] <span class="comment">// 数值最大为23</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">time</span>: &#123;</span><br><span class="line">        <span class="attr">type</span>: <span class="built_in">Date</span>,</span><br><span class="line">        <span class="attr">default</span>: <span class="built_in">Date</span>.now <span class="comment">// 默认值</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">category</span>: &#123;</span><br><span class="line">        <span class="attr">type</span>: <span class="built_in">String</span>,</span><br><span class="line">        <span class="comment">// 枚举，传入的值不是规定的值就验证失败</span></span><br><span class="line">        <span class="attr">enum</span>: &#123;</span><br><span class="line">            <span class="attr">values</span>: [<span class="string">&#x27;love&#x27;</span>, <span class="string">&#x27;like&#x27;</span>, <span class="string">&#x27;thank&#x27;</span>],</span><br><span class="line">            <span class="attr">message</span>: <span class="string">&#x27;&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">author</span>: &#123;</span><br><span class="line">        <span class="attr">type</span>: <span class="built_in">String</span>,</span><br><span class="line">        <span class="comment">// 自定义验证规则</span></span><br><span class="line">        <span class="attr">validate</span>: &#123;</span><br><span class="line">            <span class="comment">// 返回布尔值 true验证成功  false验证失败 v就是传入的值</span></span><br><span class="line">            <span class="attr">validator</span>: <span class="function"><span class="params">v</span> =&gt;</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> v &amp;&amp; v.length &gt; <span class="number">4</span></span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="comment">// 自定义错误信息</span></span><br><span class="line">            <span class="attr">message</span>: <span class="string">&#x27;传入的值不符合验证规则&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">const</span> post = mongoose.model(<span class="string">&#x27;Post&#x27;</span>, db)</span><br><span class="line">post.create(&#123; <span class="attr">title</span>: <span class="string">&#x27;dyy222&#x27;</span>, <span class="attr">age</span>: <span class="number">16</span>, <span class="attr">category</span>: <span class="string">&#x27;love22&#x27;</span>, <span class="attr">author</span>: <span class="string">&#x27;you&#x27;</span> &#125;)</span><br><span class="line">    .then(<span class="function"><span class="params">res</span> =&gt;</span> <span class="built_in">console</span>.log(res))</span><br><span class="line">    .catch(<span class="function"><span class="params">error</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// 将错误信息打印到控制台</span></span><br><span class="line">        <span class="keyword">const</span> err = error.errors;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> attr <span class="keyword">in</span> err) &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(err[attr][<span class="string">&#x27;message&#x27;</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/09/30/ZK5PeL26O4XDnUp.png" alt="image-20210930105833249"></p>
 
     </div>
 
@@ -391,20 +289,20 @@
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/node/" rel="tag"># node</a>
+              <a href="/tags/mongodb/" rel="tag"># mongodb</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2021/09/17/Node%E5%B8%B8%E7%94%A8%E5%86%85%E7%BD%AE%E6%A8%A1%E5%9D%97/" rel="prev" title="Node常用内置模块">
-                  <i class="fa fa-chevron-left"></i> Node常用内置模块
+                <a href="/2021/09/29/MongoDB%E5%92%8CNode/" rel="prev" title="MongoDB和Node">
+                  <i class="fa fa-chevron-left"></i> MongoDB和Node
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2021/09/22/Buffer/" rel="next" title="Buffer">
-                  Buffer <i class="fa fa-chevron-right"></i>
+                <a href="/2021/09/30/MongoDB%E5%92%8CNode%EF%BC%88%E4%B8%89%EF%BC%89/" rel="next" title="MongoDB和Node（三）">
+                  MongoDB和Node（三） <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
