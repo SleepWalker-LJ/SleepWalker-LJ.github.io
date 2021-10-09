@@ -556,4 +556,128 @@
         <tag>node</tag>
       </tags>
   </entry>
+  <entry>
+    <title>koa框架</title>
+    <url>/2021/09/30/koa%E6%A1%86%E6%9E%B6/</url>
+    <content><![CDATA[<h1 id="一，创建"><a href="#一，创建" class="headerlink" title="一，创建"></a>一，创建</h1><h2 id="1-依赖"><a href="#1-依赖" class="headerlink" title="1. 依赖"></a>1. 依赖</h2><ul>
+<li>koa</li>
+<li>nodemon</li>
+<li>koa-router</li>
+<li>koa-parser：解析json（body）参数</li>
+<li>koa-multer：解析文件</li>
+<li>koa-static：部署静态服务器</li>
+</ul>
+<blockquote>
+<p>ctx.request.url：请求地址</p>
+<p>ctx.request.query：请求参数</p>
+<p>ctx.request.path：路径</p>
+<p>ctx.request.body：请求的json</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 返回类</span></span><br><span class="line"><span class="keyword">const</span> Koa = <span class="built_in">require</span>(<span class="string">&#x27;koa&#x27;</span>)</span><br><span class="line"><span class="comment">// 创建koa实例</span></span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Koa()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 中间件类似什么？</span></span><br><span class="line"><span class="comment">// 通过use()方法注册中间件，本质上是一种回调函数</span></span><br><span class="line"><span class="comment">// ctx代表依次请求的上下文对象   next执行下一个中间件</span></span><br><span class="line"><span class="comment">// ctx.request：获取请求对象    ctx.response：获取响应对象；</span></span><br><span class="line">app.use(<span class="function">(<span class="params">ctx, next</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;中间件被执行&#x27;</span>);</span><br><span class="line">    <span class="comment">// 响应请求的内容（body的类型可以是很多种）</span></span><br><span class="line">    ctx.response.body = <span class="string">&quot;hello&quot;</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 监听8000端口</span></span><br><span class="line">app.listen(<span class="number">8000</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;服务器启动成功&#x27;</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-路由"><a href="#2-路由" class="headerlink" title="2. 路由"></a>2. 路由</h3><blockquote>
+<p>开发中，将各个模块的路由文件放入router文件夹中，每个路由模块js都有自己的地址。一级一级往下走</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">---服务器---</span><br><span class="line"><span class="keyword">const</span> Koa = <span class="built_in">require</span>(<span class="string">&#x27;koa&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Koa()</span><br><span class="line"><span class="keyword">const</span> userRouter = <span class="built_in">require</span>(<span class="string">&#x27;./router/user.router&#x27;</span>)</span><br><span class="line"></span><br><span class="line">app.use(userRouter.routes())</span><br><span class="line"><span class="comment">// 提示“访问方法不允许”</span></span><br><span class="line">app.use(userRouter.allowedMethods())</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">8000</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;服务器启动成功&#x27;</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">---userRouter---</span><br><span class="line"><span class="keyword">const</span> Router = <span class="built_in">require</span>(<span class="string">&#x27;koa-router&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// prefix：前缀</span></span><br><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> Router(&#123; <span class="attr">prefix</span>: <span class="string">&quot;/users&quot;</span> &#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 配置了prefix，写个&#x27;/&#x27;就可以了，类似baseURL</span></span><br><span class="line">router.put(<span class="string">&#x27;/&#x27;</span>, <span class="function">(<span class="params">ctx, next</span>) =&gt;</span> &#123;</span><br><span class="line">    ctx.response.body = <span class="string">&quot;put request&quot;</span></span><br><span class="line">&#125;)</span><br><span class="line">router.get(<span class="string">&#x27;/&#x27;</span>, <span class="function">(<span class="params">ctx, next</span>) =&gt;</span> &#123;</span><br><span class="line">    ctx.response.body = <span class="string">&quot;get request&quot;</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = router</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-参数解析"><a href="#3-参数解析" class="headerlink" title="3. 参数解析"></a>3. 参数解析</h3><p><strong>五种接收方式：</strong></p>
+<ol>
+<li>params： /user/abc   直接带上参数</li>
+<li>query：  /user/abc?name=lj&amp;age=23</li>
+<li>json： body是json格式</li>
+<li>urlencoded：body是x-www-form-urlencoded格式</li>
+<li>form-data：body是form-data格式</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> Router(&#123; <span class="attr">prefix</span>: <span class="string">&quot;/users&quot;</span> &#125;)</span><br><span class="line">router.get(<span class="string">&#x27;/:id&#x27;</span>, <span class="function">(<span class="params">ctx, next</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 假设路径为/users/abc   params就是abc</span></span><br><span class="line">    <span class="built_in">console</span>.log(ctx.request.params);</span><br><span class="line">    <span class="built_in">console</span>.log(ctx.request.query);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 解析json和urlencoded参数   使用koa-bodyParser库</span></span><br><span class="line"><span class="keyword">const</span> bodyParser = <span class="built_in">require</span>(<span class="string">&#x27;koa-bodyparser&#x27;</span>)</span><br><span class="line">app.use(bodyParser())</span><br><span class="line">router.post(<span class="string">&#x27;/&#x27;</span>, <span class="function">(<span class="params">ctx, next</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(ctx.request.body);</span><br><span class="line">    ctx.response.body = <span class="string">&quot;hello&quot;</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-文件上传"><a href="#4-文件上传" class="headerlink" title="4. 文件上传"></a>4. 文件上传</h3><blockquote>
+<p>multer的信息都在原生的req中，不在ctx.request中</p>
+<p>自定义文件名和后缀名，后期学习？</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> Koa = <span class="built_in">require</span>(<span class="string">&#x27;koa&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> bodyParser = <span class="built_in">require</span>(<span class="string">&#x27;koa-bodyparser&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> uploadRouter = <span class="built_in">require</span>(<span class="string">&#x27;./router/upload.router&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Koa()</span><br><span class="line">app.use(bodyParser())</span><br><span class="line">app.use(uploadRouter.routes())</span><br><span class="line">app.use(uploadRouter.allowedMethods())</span><br><span class="line">app.listen(<span class="number">8000</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;服务器启动成功&#x27;</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Router = <span class="built_in">require</span>(<span class="string">&#x27;koa-router&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> multer = <span class="built_in">require</span>(<span class="string">&#x27;koa-multer&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> Router(&#123; <span class="attr">prefix</span>: <span class="string">&quot;/upload&quot;</span> &#125;)</span><br><span class="line"><span class="comment">// 文件存储位置</span></span><br><span class="line"><span class="keyword">const</span> upload = multer(&#123;</span><br><span class="line">    <span class="attr">dest</span>: <span class="string">&#x27;./uploads&#x27;</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 上传单张图片，键名为avatar</span></span><br><span class="line">router.post(<span class="string">&#x27;/avatar&#x27;</span>, upload.single(<span class="string">&#x27;avatar&#x27;</span>), <span class="function">(<span class="params">ctx, next</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(ctx.req.file);</span><br><span class="line">    ctx.response.body = <span class="string">&quot;上传头像成功&quot;</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">module</span>.exports = router</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/10/03/YItl7QEToBPrHmb.png" alt="image-20211003091820791"></p>
+<h3 id="5-数据的响应"><a href="#5-数据的响应" class="headerlink" title="5. 数据的响应"></a>5. 数据的响应</h3><blockquote>
+<p>ctx.response.status  简写  ctx.status </p>
+<p>ctx.response.body  简写   ctx.body  </p>
+</blockquote>
+<p><img src="https://i.loli.net/2021/10/03/Wd7iZVBaUkv3AhQ.png" alt="image-20211003092434160"></p>
+<h3 id="6-静态服务器"><a href="#6-静态服务器" class="headerlink" title="6. 静态服务器"></a>6. 静态服务器</h3><blockquote>
+<p>koa并没有内置部署相关的功能，所以我们需要使用第三方库koa-static</p>
+</blockquote>
+<p><img src="https://i.loli.net/2021/10/03/Yqi3N8Uso1ZzpdT.png" alt="image-20211003100001432"></p>
+<h3 id="7-错误处理方式"><a href="#7-错误处理方式" class="headerlink" title="7. 错误处理方式"></a>7. 错误处理方式</h3><p><img src="https://i.loli.net/2021/10/03/8wxhU9EQIn5JvcA.png" alt="image-20211003150804162"></p>
+<h2 id="二，koa源码"><a href="#二，koa源码" class="headerlink" title="二，koa源码"></a>二，koa源码</h2><h3 id="1-源码"><a href="#1-源码" class="headerlink" title="1. 源码"></a>1. 源码</h3><h3 id="2-对比express"><a href="#2-对比express" class="headerlink" title="2. 对比express"></a>2. 对比express</h3><h3 id="3-洋葱模型"><a href="#3-洋葱模型" class="headerlink" title="3. 洋葱模型"></a>3. 洋葱模型</h3>]]></content>
+      <tags>
+        <tag>node</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>mongodbHUb</title>
+    <url>/2021/10/03/mongodbHUb/</url>
+    <content><![CDATA[<h2 id="一，项目搭建"><a href="#一，项目搭建" class="headerlink" title="一，项目搭建"></a>一，项目搭建</h2><h3 id="1-初始化"><a href="#1-初始化" class="headerlink" title="1. 初始化"></a>1. 初始化</h3><ul>
+<li>初始化：npm init -y</li>
+<li>安装第三方库：<ul>
+<li>koa</li>
+<li>npm i nodemon -D</li>
+<li>dotenv：将.env文件加载到process.env中</li>
+<li>koa-router</li>
+<li>koa-bodyparser：解析json数据</li>
+<li>mongoose</li>
+<li>koa2-cors：解决跨域问题</li>
+<li>jsonwebtoken：实现jwt</li>
+</ul>
+</li>
+<li>配置package.json：”start”: “nodemon ./src/main.js”</li>
+</ul>
+<h2 id="二，JWT"><a href="#二，JWT" class="headerlink" title="二，JWT"></a>二，JWT</h2><h3 id="1-md5加密"><a href="#1-md5加密" class="headerlink" title="1. md5加密"></a>1. md5加密</h3><blockquote>
+<p>传入的密码必须是字符串形式</p>
+</blockquote>
+<h3 id="2-认识token"><a href="#2-认识token" class="headerlink" title="2. 认识token"></a>2. 认识token</h3><blockquote>
+<p>步骤一：生成token，登录的时候颁发token</p>
+<p>步骤二：验证token，访问某些资源或接口时，验证token</p>
+</blockquote>
+<h3 id="3-JWT实现token机制"><a href="#3-JWT实现token机制" class="headerlink" title="3. JWT实现token机制"></a>3. JWT实现token机制</h3><blockquote>
+<p>类似一个有锁的日记本，内容进行了混淆</p>
+<p>HS256是对称加密</p>
+</blockquote>
+<ul>
+<li>header<ul>
+<li>alg：采用的加密算法，默认是 HMAC SHA256（HS256），采用同一个密钥进行 加密和解密</li>
+<li>typ：JWT，固定值，通常都写成JWT即可</li>
+<li>会通过base64Url算法进行编码</li>
+</ul>
+</li>
+<li>payload<ul>
+<li>携带的数据，比如我们可以将用户的id和name放到payload中</li>
+<li>默认也会携带iat（issued at），令牌的签发时间</li>
+<li>我们也可以设置过期时间：exp（expiration time）</li>
+<li>会通过base64Url算法进行编码</li>
+</ul>
+</li>
+<li>signature<ul>
+<li>设置一个secretKey，通过将前两个的结果合并后进行HMACSHA256的算法</li>
+<li>HMACSHA256(base64Url(header)+.+base64Url(payload), secretKey)</li>
+<li>但是如果secretKey暴露是一件非常危险的事情，因为之后就可以模拟颁发token， 也可以解密token</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-非对称加密"><a href="#4-非对称加密" class="headerlink" title="4. 非对称加密"></a>4. 非对称加密</h3><blockquote>
+<p>这个时候我们可以使用非对称加密，RS256</p>
+</blockquote>
+<ul>
+<li>私钥（private key）：用于发布令牌</li>
+<li>公钥（public key）：用于验证令牌</li>
+<li>我们可以使用openssl来生成一对私钥和公钥<ol>
+<li>openssl</li>
+<li>genrsa -out private.key 1024  （生成私钥）</li>
+<li>rsa -in private.key -pubout -out public.key  （使用私钥生成公钥）</li>
+</ol>
+</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>node</tag>
+      </tags>
+  </entry>
 </search>

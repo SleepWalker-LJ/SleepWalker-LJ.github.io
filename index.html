@@ -164,7 +164,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -210,6 +210,214 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/03/mongodbHUb/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="sleepwalker">
+      <meta itemprop="description" content="追寻探索未知的事物，感受生命的美好">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SleepWalkerWorld">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/10/03/mongodbHUb/" class="post-title-link" itemprop="url">mongodbHUb</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-10-03 23:08:38" itemprop="dateCreated datePublished" datetime="2021-10-03T23:08:38+08:00">2021-10-03</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-10-08 18:20:16" itemprop="dateModified" datetime="2021-10-08T18:20:16+08:00">2021-10-08</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="一，项目搭建"><a href="#一，项目搭建" class="headerlink" title="一，项目搭建"></a>一，项目搭建</h2><h3 id="1-初始化"><a href="#1-初始化" class="headerlink" title="1. 初始化"></a>1. 初始化</h3><ul>
+<li>初始化：npm init -y</li>
+<li>安装第三方库：<ul>
+<li>koa</li>
+<li>npm i nodemon -D</li>
+<li>dotenv：将.env文件加载到process.env中</li>
+<li>koa-router</li>
+<li>koa-bodyparser：解析json数据</li>
+<li>mongoose</li>
+<li>koa2-cors：解决跨域问题</li>
+<li>jsonwebtoken：实现jwt</li>
+</ul>
+</li>
+<li>配置package.json：”start”: “nodemon ./src/main.js”</li>
+</ul>
+<h2 id="二，JWT"><a href="#二，JWT" class="headerlink" title="二，JWT"></a>二，JWT</h2><h3 id="1-md5加密"><a href="#1-md5加密" class="headerlink" title="1. md5加密"></a>1. md5加密</h3><blockquote>
+<p>传入的密码必须是字符串形式</p>
+</blockquote>
+<h3 id="2-认识token"><a href="#2-认识token" class="headerlink" title="2. 认识token"></a>2. 认识token</h3><blockquote>
+<p>步骤一：生成token，登录的时候颁发token</p>
+<p>步骤二：验证token，访问某些资源或接口时，验证token</p>
+</blockquote>
+<h3 id="3-JWT实现token机制"><a href="#3-JWT实现token机制" class="headerlink" title="3. JWT实现token机制"></a>3. JWT实现token机制</h3><blockquote>
+<p>类似一个有锁的日记本，内容进行了混淆</p>
+<p>HS256是对称加密</p>
+</blockquote>
+<ul>
+<li>header<ul>
+<li>alg：采用的加密算法，默认是 HMAC SHA256（HS256），采用同一个密钥进行 加密和解密</li>
+<li>typ：JWT，固定值，通常都写成JWT即可</li>
+<li>会通过base64Url算法进行编码</li>
+</ul>
+</li>
+<li>payload<ul>
+<li>携带的数据，比如我们可以将用户的id和name放到payload中</li>
+<li>默认也会携带iat（issued at），令牌的签发时间</li>
+<li>我们也可以设置过期时间：exp（expiration time）</li>
+<li>会通过base64Url算法进行编码</li>
+</ul>
+</li>
+<li>signature<ul>
+<li>设置一个secretKey，通过将前两个的结果合并后进行HMACSHA256的算法</li>
+<li>HMACSHA256(base64Url(header)+.+base64Url(payload), secretKey)</li>
+<li>但是如果secretKey暴露是一件非常危险的事情，因为之后就可以模拟颁发token， 也可以解密token</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-非对称加密"><a href="#4-非对称加密" class="headerlink" title="4. 非对称加密"></a>4. 非对称加密</h3><blockquote>
+<p>这个时候我们可以使用非对称加密，RS256</p>
+</blockquote>
+<ul>
+<li>私钥（private key）：用于发布令牌</li>
+<li>公钥（public key）：用于验证令牌</li>
+<li>我们可以使用openssl来生成一对私钥和公钥<ol>
+<li>openssl</li>
+<li>genrsa -out private.key 1024  （生成私钥）</li>
+<li>rsa -in private.key -pubout -out public.key  （使用私钥生成公钥）</li>
+</ol>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/30/koa%E6%A1%86%E6%9E%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="sleepwalker">
+      <meta itemprop="description" content="追寻探索未知的事物，感受生命的美好">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SleepWalkerWorld">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/09/30/koa%E6%A1%86%E6%9E%B6/" class="post-title-link" itemprop="url">koa框架</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-09-30 18:21:52" itemprop="dateCreated datePublished" datetime="2021-09-30T18:21:52+08:00">2021-09-30</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-10-09 16:00:56" itemprop="dateModified" datetime="2021-10-09T16:00:56+08:00">2021-10-09</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>Koa 是一个新的 web 框架，由 Express 幕后的原班人马打造， 致力于成为 web 应用和 API 开发领域中的一个更小、更富有表现力、更健壮的基石。 通过利用 async 函数，Koa 帮你丢弃回调函数，并有力地增强错误处理。 Koa 并没有捆绑任何中间件， 而是提供了一套优雅的方法，帮助您快速而愉快地编写服务端应用程序。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/09/30/koa%E6%A1%86%E6%9E%B6/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -795,167 +1003,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2021/09/16/ES-Module/">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/16/%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="sleepwalker">
-      <meta itemprop="description" content="追寻探索未知的事物，感受生命的美好">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SleepWalkerWorld">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/09/16/%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">开发总结</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-09-16 17:13:01" itemprop="dateCreated datePublished" datetime="2021-09-16T17:13:01+08:00">2021-09-16</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-09-28 15:56:25" itemprop="dateModified" datetime="2021-09-28T15:56:25+08:00">2021-09-28</time>
-      </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="一，移动端"><a href="#一，移动端" class="headerlink" title="一，移动端"></a>一，移动端</h2><h4 id="开发经验"><a href="#开发经验" class="headerlink" title="开发经验"></a>开发经验</h4><ol>
-<li>开始时进行分包</li>
-<li>下拉刷新：如果是整个页面的刷新是写在外面的</li>
-<li>样式的话，先写的差不多，再去调，不要写一下调一下，浪费时间</li>
-<li>有些样式不好调的时候，可以直接在调试工具找到对应的元素或上级元素，直接写样式代码来调整。</li>
-</ol>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/09/16/%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/14/%E6%A8%A1%E5%9D%97%E5%8C%96%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="sleepwalker">
-      <meta itemprop="description" content="追寻探索未知的事物，感受生命的美好">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SleepWalkerWorld">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/09/14/%E6%A8%A1%E5%9D%97%E5%8C%96%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B/" class="post-title-link" itemprop="url">模块化加载过程</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-09-14 17:37:01" itemprop="dateCreated datePublished" datetime="2021-09-14T17:37:01+08:00">2021-09-14</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-09-17 12:31:51" itemprop="dateModified" datetime="2021-09-17T12:31:51+08:00">2021-09-17</time>
-      </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h4 id="3-模块加载过程"><a href="#3-模块加载过程" class="headerlink" title="3. 模块加载过程"></a>3. 模块加载过程</h4>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/09/14/%E6%A8%A1%E5%9D%97%E5%8C%96%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>

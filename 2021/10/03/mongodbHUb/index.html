@@ -22,25 +22,28 @@
   <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="追寻探索未知的事物，感受生命的美好">
-<meta property="og:type" content="website">
-<meta property="og:title" content="SleepWalkerWorld">
-<meta property="og:url" content="http://example.com/tags/mongodb/index.html">
+<meta name="description" content="一，项目搭建1. 初始化 初始化：npm init -y 安装第三方库： koa npm i nodemon -D dotenv：将.env文件加载到process.env中 koa-router koa-bodyparser：解析json数据 mongoose koa2-cors：解决跨域问题 jsonwebtoken：实现jwt   配置package.json：”start”: “nodem">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mongodbHUb">
+<meta property="og:url" content="http://example.com/2021/10/03/mongodbHUb/index.html">
 <meta property="og:site_name" content="SleepWalkerWorld">
-<meta property="og:description" content="追寻探索未知的事物，感受生命的美好">
+<meta property="og:description" content="一，项目搭建1. 初始化 初始化：npm init -y 安装第三方库： koa npm i nodemon -D dotenv：将.env文件加载到process.env中 koa-router koa-bodyparser：解析json数据 mongoose koa2-cors：解决跨域问题 jsonwebtoken：实现jwt   配置package.json：”start”: “nodem">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-10-03T15:08:38.000Z">
+<meta property="article:modified_time" content="2021-10-08T10:20:16.089Z">
 <meta property="article:author" content="sleepwalker">
+<meta property="article:tag" content="node">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://example.com/tags/mongodb/">
+<link rel="canonical" href="http://example.com/2021/10/03/mongodbHUb/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"tags/mongodb/index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2021/10/03/mongodbHUb/","path":"2021/10/03/mongodbHUb/","title":"mongodbHUb"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>标签: mongodb | SleepWalkerWorld</title>
+<title>mongodbHUb | SleepWalkerWorld</title>
   
 
 
@@ -137,7 +140,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -150,6 +153,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%EF%BC%8C%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA"><span class="nav-number">1.</span> <span class="nav-text">一，项目搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">1.1.</span> <span class="nav-text">1. 初始化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%EF%BC%8CJWT"><span class="nav-number">2.</span> <span class="nav-text">二，JWT</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-md5%E5%8A%A0%E5%AF%86"><span class="nav-number">2.1.</span> <span class="nav-text">1. md5加密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E8%AE%A4%E8%AF%86token"><span class="nav-number">2.2.</span> <span class="nav-text">2. 认识token</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-JWT%E5%AE%9E%E7%8E%B0token%E6%9C%BA%E5%88%B6"><span class="nav-number">2.3.</span> <span class="nav-text">3. JWT实现token机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86"><span class="nav-number">2.4.</span> <span class="nav-text">4. 非对称加密</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -209,90 +213,159 @@
 </noscript>
 
 
-    <div class="main-inner tag posts-collapse">
+    <div class="main-inner post posts-expand">
 
 
   
-  
-  
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
-        <h2 class="collection-header">mongodb
-          <small>标签</small>
-        </h2>
-      </div>
 
-      
-    <div class="collection-year">
-      <span class="collection-header">2021</span>
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/03/mongodbHUb/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="sleepwalker">
+      <meta itemprop="description" content="追寻探索未知的事物，感受生命的美好">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SleepWalkerWorld">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          mongodbHUb
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-10-03 23:08:38" itemprop="dateCreated datePublished" datetime="2021-10-03T23:08:38+08:00">2021-10-03</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-10-08 18:20:16" itemprop="dateModified" datetime="2021-10-08T18:20:16+08:00">2021-10-08</time>
+      </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="一，项目搭建"><a href="#一，项目搭建" class="headerlink" title="一，项目搭建"></a>一，项目搭建</h2><h3 id="1-初始化"><a href="#1-初始化" class="headerlink" title="1. 初始化"></a>1. 初始化</h3><ul>
+<li>初始化：npm init -y</li>
+<li>安装第三方库：<ul>
+<li>koa</li>
+<li>npm i nodemon -D</li>
+<li>dotenv：将.env文件加载到process.env中</li>
+<li>koa-router</li>
+<li>koa-bodyparser：解析json数据</li>
+<li>mongoose</li>
+<li>koa2-cors：解决跨域问题</li>
+<li>jsonwebtoken：实现jwt</li>
+</ul>
+</li>
+<li>配置package.json：”start”: “nodemon ./src/main.js”</li>
+</ul>
+<h2 id="二，JWT"><a href="#二，JWT" class="headerlink" title="二，JWT"></a>二，JWT</h2><h3 id="1-md5加密"><a href="#1-md5加密" class="headerlink" title="1. md5加密"></a>1. md5加密</h3><blockquote>
+<p>传入的密码必须是字符串形式</p>
+</blockquote>
+<h3 id="2-认识token"><a href="#2-认识token" class="headerlink" title="2. 认识token"></a>2. 认识token</h3><blockquote>
+<p>步骤一：生成token，登录的时候颁发token</p>
+<p>步骤二：验证token，访问某些资源或接口时，验证token</p>
+</blockquote>
+<h3 id="3-JWT实现token机制"><a href="#3-JWT实现token机制" class="headerlink" title="3. JWT实现token机制"></a>3. JWT实现token机制</h3><blockquote>
+<p>类似一个有锁的日记本，内容进行了混淆</p>
+<p>HS256是对称加密</p>
+</blockquote>
+<ul>
+<li>header<ul>
+<li>alg：采用的加密算法，默认是 HMAC SHA256（HS256），采用同一个密钥进行 加密和解密</li>
+<li>typ：JWT，固定值，通常都写成JWT即可</li>
+<li>会通过base64Url算法进行编码</li>
+</ul>
+</li>
+<li>payload<ul>
+<li>携带的数据，比如我们可以将用户的id和name放到payload中</li>
+<li>默认也会携带iat（issued at），令牌的签发时间</li>
+<li>我们也可以设置过期时间：exp（expiration time）</li>
+<li>会通过base64Url算法进行编码</li>
+</ul>
+</li>
+<li>signature<ul>
+<li>设置一个secretKey，通过将前两个的结果合并后进行HMACSHA256的算法</li>
+<li>HMACSHA256(base64Url(header)+.+base64Url(payload), secretKey)</li>
+<li>但是如果secretKey暴露是一件非常危险的事情，因为之后就可以模拟颁发token， 也可以解密token</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-非对称加密"><a href="#4-非对称加密" class="headerlink" title="4. 非对称加密"></a>4. 非对称加密</h3><blockquote>
+<p>这个时候我们可以使用非对称加密，RS256</p>
+</blockquote>
+<ul>
+<li>私钥（private key）：用于发布令牌</li>
+<li>公钥（public key）：用于验证令牌</li>
+<li>我们可以使用openssl来生成一对私钥和公钥<ol>
+<li>openssl</li>
+<li>genrsa -out private.key 1024  （生成私钥）</li>
+<li>rsa -in private.key -pubout -out public.key  （使用私钥生成公钥）</li>
+</ol>
+</li>
+</ul>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2021-09-30T13:47:20+08:00"
-              content="2021-09-30">
-          09-30
-        </time>
-      </div>
+    
+    
+    
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/09/30/MongoDB%E5%92%8CNode%EF%BC%88%E4%B8%89%EF%BC%89/" itemprop="url">
-            <span itemprop="name">MongoDB和Node（三）</span>
-          </a>
-      </div>
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/node/" rel="tag"># node</a>
+          </div>
 
-      
-    </header>
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/09/30/koa%E6%A1%86%E6%9E%B6/" rel="prev" title="koa框架">
+                  <i class="fa fa-chevron-left"></i> koa框架
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
   </article>
+</div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2021-09-30T13:42:46+08:00"
-              content="2021-09-30">
-          09-30
-        </time>
-      </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/09/30/MongoDB%E5%92%8CNode%EF%BC%88%E4%BA%8C%EF%BC%89/" itemprop="url">
-            <span itemprop="name">MongoDB和Node（二）</span>
-          </a>
-      </div>
 
-      
-    </header>
-  </article>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2021-09-29T18:48:18+08:00"
-              content="2021-09-29">
-          09-29
-        </time>
-      </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/09/29/MongoDB%E5%92%8CNode/" itemprop="url">
-            <span itemprop="name">MongoDB和Node</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-    </div>
-  </div>
-  
-  
-  
 
 </div>
   </main>
